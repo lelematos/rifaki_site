@@ -1,0 +1,143 @@
+.page-content {
+    top: 75px !important;
+}
+
+.uk-slider-meu {
+    margin: 0px 40px !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.flex-align-center {
+    align-self: center;
+    display: flex;
+    border: none;
+}
+
+.titulo {
+    font-weight: 600;
+}
+
+.uk-button {
+    font-size: 2.5rem;
+}
+
+.card-desc-meu .uk-button {
+    background-color: #1C1715;
+    height: 39%;
+    top: 58% !important;
+    transition: 0.2s ease;
+    border: solid 1px white;
+    border-top: none;
+    opacity: 0.95 !important;
+    border-radius: 5px !important;
+    line-height: 32px;
+}
+
+.card-desc-meu .uk-button a {
+    font-size: 1.4rem;
+}
+
+.centered-message {
+    text-align: center;
+}
+
+
+.centered-message h1 {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.black-button {
+    height: 47%;
+    background: black;
+    border-radius: 5px;
+    border: transparent;
+    line-height: 22px;
+    width: 80px;
+    margin-left: 5px;
+    order: 2;
+    padding: 0;
+}
+
+.black-button:hover {
+    background: black;
+    border-radius: 5px;
+}
+
+.texto-grey-button {
+    text-transform: capitalize !important;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.texto-grey-button:hover {
+    text-transform: capitalize !important;
+    color: #0198E1;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.card-anuncio {
+    background-color: white;
+    width: auto;
+    height: auto;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.uk-slider-items li img {
+    margin-right: 0px;
+    border-radius: 5px;
+}
+
+.anuncio-infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.anuncio-infos h2 {
+    visibility: hidden;
+}
+
+.anuncio-infos:hover h2 {
+    visibility: visible;
+}
+
+.group-buttons {
+    margin-left: auto;
+    display: flex;
+    height: 55px;
+    margin-bottom: -27px;
+}
+
+
+
+
+
+
+
+@media (hover: none) {
+    .card-desc-meu {
+        visibility: hidden;
+    }
+
+    .uk-dotnav {
+        visibility: hidden;
+    }
+
+    /* .imagem-slider {
+        z-index: 9999;
+    } */
+}

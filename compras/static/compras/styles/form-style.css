@@ -1,0 +1,108 @@
+.sec-form {
+    height: auto;
+    width: auto;
+    position: realtive;
+    padding-top: 2%;
+    padding-left: 3%;
+}
+
+.sec-form-edit-user {
+    padding-top: 2%;
+}
+
+.lupa-pesquisa {
+    width: 2.6rem !important;
+    height: 2.6rem !important;
+}
+
+.btn-black-meu {
+    font-weight: bolder;
+    background-color: black;
+    border-radius: 5px;
+}
+
+
+.btn-black-meu:hover {
+    color: #0198E1;
+    background-color: black !important;
+    border-radius: 5px !important;
+}
+
+.nav-bar-mobile ul {
+    padding-top: 15px !important;
+}
+
+.uk-button {
+    font-size: 1.6rem !important;
+    text-transform: capitalize !important;
+    border-radius: 6px;
+}
+
+input {
+    font-size: 1.6rem !important;
+}
+
+.page-content .sec-form h2 {
+    color: white !important;
+    font-weight: bold;
+}
+
+.page-content .sec-form-cadastrar h2 {
+    color: white !important;
+    font-weight: bold;
+}
+
+.page-content .sec-form-edit-user h2 {
+    color: white !important;
+    font-weight: bold;
+}
+
+.page-content .form-group label {
+    color: white !important;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.form-group p {
+    color: white !important;
+}
+
+.login-page {
+    margin-left: 37.5%;
+    margin-top: 5%;
+}
+
+.anuncio {
+    height: 1500px;
+}
+
+.user {
+    height: 1300px;
+}
+
+.login {
+    height: 1080px;
+}
+
+.cadastro-user-page {
+    margin-left: 35%;
+}
+
+
+
+@media (max-width: 925px) {
+    .sec-form-edit-user {
+        margin: 0 auto;
+        width: 85vw;
+    }
+}
+
+@media (max-width:587px) {
+    .sec-form-cadastrar {
+        margin: 0 auto;
+        width: 85vw;
+    }
+}

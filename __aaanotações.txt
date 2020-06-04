@@ -1,0 +1,11 @@
+--- Alterar a localizacao da view cadastrar anuncio para dentro do app cadastro
+--- Comandos inicialização:
+    cd.. && env\scripts\activate && cd rifaki_site && py manage.py runserver
+    manage.py runserver
+
+    cd.. && env\scripts\activate && cd rifaki_site && py manage.py shell 
+
+
+
+
+

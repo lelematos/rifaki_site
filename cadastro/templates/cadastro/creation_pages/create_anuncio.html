@@ -1,0 +1,328 @@
+{% extends 'teste_rifaki/html/base.html' %}   {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://jquery-textfill.github.io/js/textfill/jquery.textfill.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/cadastro_anuncio_.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+{% endblock head %}
+
+
+
+{% block content %}
+    <div class="sec-form sec-form-anuncio">
+        <h2>Novo anúncio</h2>
+
+        <form method="POST" class="form-group" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ form.non_field_errors }}
+
+{% comment %} ESCRITA {% endcomment %}
+            <ul class='secao-escrita'>
+                <li class="{{ form.text_color.id_for_label }}">
+                    {{form.text_color.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div>
+                                <label class='fake-input' for='id_text_color'>Cor título*</label>
+                                {{form.text_color}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.text_color.help_text }}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ form.titulo_anuncio.id_for_label }}">
+                    {{form.titulo_anuncio.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div class='float-container' id='floatContainer'>
+                                <label class='fake-input' for='id_titulo_anuncio'>Título*</label>
+                                {{form.titulo_anuncio}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.titulo_anuncio.help_text }}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ form.ano_fabricacao.id_for_label }}">
+                    {{form.ano_fabricacao.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div class='float-container' id='floatContainer'>
+                                <label class='fake-input' for='id_ano_fabricacao'>Ano de fabricação*</label>
+                                {{form.ano_fabricacao}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.titulo_anuncio.help_text }}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ form.descricao_breve.id_for_label }}">
+                    {{form.descricao_breve.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div class='float-container' id='floatContainer'>
+                                <label class='fake-input' for='id_descricao_breve'>Descrição breve*</label>
+                                {{form.descricao_breve}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.descricao_breve.help_text }}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ form.descricao_completa.id_for_label }}">
+                    {{form.descricao_completa.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div class='float-container' id='floatContainer'>
+                                <label class='fake-input' for='id_descricao_completa'>Descrição completa*</label>
+                                {{form.descricao_completa}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.descricao_completa.help_text }}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ form.preco.id_for_label }}">
+                    {{form.preco.errors}}
+                    <ul class='label-input'>
+                        <li>
+                            <div class='float-container ctn-preco' id='floatContainer'>
+                                <button class='uk-button uk-button-secondary rs-btn'>R$</button>
+                                <label class='fake-input' class='label-preco' for='id_preco'>Preço*</label>
+                                {{form.preco}}
+                            </div>
+                        </li>
+                        <li>
+                            {{ form.preco.help_text }}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+{% comment %} IMAGENS {% endcomment %}
+            <ul class='imagens'>            
+                <li class="{{ form.imagem1.id_for_label }}">
+                    <ul class='up-imagens'>
+                        <li> 
+                            {{form.imagem1.errors}}
+                        </li>
+                        <li> 
+                            <label class='label-imagem1' for="{{ form.imagem1.id_for_label }}">Imagem principal:</label>
+                        </li>
+                        <li>
+                            {{form.imagem1}} 
+                            <button type='button' class="uk-button uk-button-secondary btn-clear" onclick='limpa_img_input(0)'>Excluir</button>
+                        </li>   
+                        <li>
+                            {{ form.imagem1.help_text }}
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ form.imagem2.id_for_label }}">
+                    <ul class='up-imagens'>
+                        <li> 
+                            {{form.imagem2.errors}}
+                        </li>
+                        <li> 
+                            <label class='label-imagem2' for="{{ form.imagem2.id_for_label }}">Imagem 2:</label>
+                        </li>
+                        <li>
+                            {{form.imagem2}} 
+                            <button type='button' class="uk-button uk-button-secondary btn-clear" onclick='limpa_img_input(1)'>Excluir</button> 
+                        </li>
+                        <li>
+                            {{ form.imagem2.help_text }}
+                        </li>                
+                    </ul>
+                <li class="{{ form.imagem3.id_for_label }}">
+                    <ul class='up-imagens'>
+                        <li> 
+                            {{form.imagem3.errors}}
+                        </li>
+                        <li> 
+                            <label class='label-imagem3' for="{{ form.imagem3.id_for_label }}">Imagem 3:</label>
+                        </li>
+                        <li>
+                            {{form.imagem3}}  
+                            <button type='button' class="uk-button uk-button-secondary btn-clear" onclick='limpa_img_input(2)'>Excluir</button>
+                        </li>
+                        <li>
+                            {{ form.imagem3.help_text }}
+                        </li>                
+                    </ul>
+                <li class="{{ form.imagem4.id_for_label }}">
+                    <ul class='up-imagens'>
+                        <li> 
+                            {{form.imagem4.errors}}
+                        </li>
+                        <li> 
+                            <label class='label-imagem4' for="{{ form.imagem4.id_for_label }}">Imagem 4:</label>
+                        </li>
+                        <li>
+                            {{form.imagem4}}  
+                            <button type='button' class="uk-button uk-button-secondary btn-clear" onclick='limpa_img_input(3)'>Excluir</button>
+                        </li>
+                        <li>
+                            {{ form.imagem4.help_text }}
+                        </li>                
+                    </ul>
+                <li class="{{ form.imagem5.id_for_label }}">
+                    <ul class='up-imagens'>
+                        <li> 
+                            {{form.imagem5.errors}}
+                        </li>
+                        <li> 
+                            <label class='label-imagem5' for="{{ form.imagem5.id_for_label }}">Imagem 5:</label>
+                        </li>
+                        <li>
+                            {{form.imagem5}}  
+                            <button type='button' class="uk-button uk-button-secondary btn-clear" onclick='limpa_img_input(4)'>Excluir</button>
+                        </li>
+                        <li>
+                            {{ form.imagem5.help_text }}
+                        </li>                   
+                    </ul>             
+            </ul>
+
+            <button type="submit" class="uk-button uk-button-primary btn-save">Save</button>
+        </form>
+    </div>
+
+{% comment %} PREVIEW {% endcomment %}
+    <div class='sec-preview '> 
+        <div id="slideshow" class="carousel slide" data-interval="false" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+                <li data-target="#slideshow" data-slide-to="1"></li>
+                <li data-target="#slideshow" data-slide-to="2"></li>
+                <li data-target="#slideshow" data-slide-to="3"></li>
+                <li data-target="#slideshow" data-slide-to="4"></li>
+                
+            </ol>
+            <div class="carousel-inner">
+
+                <div class="carousel-item active " style="width: 100%;">
+                    <img class='d-block w-100 output_image' src="" alt="" style="height:calc(0.7*1030.55px);">
+                </div>
+                <div class="carousel-item " style="width: 100%;">
+                    <img class='d-block w-100 output_image' src="" alt="" style="height:calc(0.7*1030.55px);">
+                </div>
+                <div class="carousel-item " style="width: 100%;">
+                    <img class='d-block w-100 output_image' src="" alt="" style="height:calc(0.7*1030.55px);">
+                </div>
+                <div class="carousel-item " style="width: 100%;">
+                    <img class='d-block w-100 output_image' src="" alt="" style="height:calc(0.7*1030.55px);">
+                </div>
+                <div class="carousel-item " style="width: 100%;">
+                    <img class='d-block w-100 output_image' src="" alt="" style="height:calc(0.7*1030.55px);">
+                </div>
+
+                <a class="carousel-control-prev" href="#slideshow" role="button" data-slide="prev" style="left: -5%;top: 10%;" >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#slideshow" role="button" data-slide="next" style="right: -5%;top: 10%;">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+       
+        <!-- SLIDESHOW+SELETOR DE NUMEROS+INFOS+TITULO+COMPRAR -->
+        <div class="sec-exposicao">
+            <div class="informacoes-veiculo-direita">
+                <div class="titulo-veiculo uk-text-center@s">
+                    <h1 class='substituir'>
+                        {% comment %} substituir {% endcomment %}
+                    </h1>
+                </div>  
+                <div class="descricao-breve uk-panel uk-panel-box uk-text-break uk-text-justify">
+                    <h3 class='substituir'>
+                           {% comment %} substituir {% endcomment %} 
+                    </h3>
+                </div>
+                <div class="seletor-numeros">
+                    <div class="card-seletor-numeros uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+                        <h3 class="uk-card-title uk-card-title-meu ">Seletor de numeros</h3>
+                        <ul class="seletores-0500">
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">000-099</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">100-199</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">200-299</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">300-399</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">400-499</span></a></li>
+                        </ul>
+                        <ul class="seletores-5001000">
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">500-599</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">600-699</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">700-799</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">800-899</span></a></li>
+                            <li><a href="#" class="dot" ><span class="uk-text-center@s">900-999</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="secao-pagamento">
+                    <div class="card-pagamento uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+                        <h2>Números selecionados:</h2>
+                        <h3 class="label-numeros-selecionados"></h3>
+                    </div>
+                    <button class="btn-relizar-pg uk-text-uppercase">comprar</button>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- DESCRICAO INFERIOR -->
+        <div class="sec-descricao">
+            <div class="desc-content uk-text-break uk-text-justify">
+                <h1>Regulamento/Descrição:<br></h1>
+                <h3 class='substituir'> 
+                    {% comment %} substituir {% endcomment %} 
+                </h3>
+                   {% comment %} Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br>
+                    Descrição completa Descrição completa Descrição completa Descrição completa Descrição  <br> {% endcomment %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %} 
+
+{% block footer %}
+{% endblock footer %}
+
+{% block script %}
+
+    <script src="{% static 'cadastro/js/cadastro_anuncio/js_cadastroAnuncio.js' %}"></script>
+   
+{% endblock script %}

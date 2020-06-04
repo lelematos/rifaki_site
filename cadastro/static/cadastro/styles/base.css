@@ -1,0 +1,269 @@
+/* gerais */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #1c1717;
+    position: relative;
+    min-height: 100%;
+    overflow-x: hidden;
+    /* cada rem = 10px */
+}
+
+body {
+    height: 100%;
+    background-color: #1c1717;
+    margin-bottom: 300px;
+    width: 100vw;
+    /* altura do footer */
+}
+
+.container {
+    width: 100vw;
+    min-width: 100% !important;
+    padding: 0px;
+    margin: 0px;
+}
+
+.footer-m {
+    position: absolute;
+    background-color: red;
+    color: white;
+    height: 50px;
+    text-align: center;
+    line-height: 50x;
+    bottom: 0;
+    margin-top: 0px;
+    width: 100vw;
+}
+
+
+.footer {
+    position: absolute;
+    background-color: red;
+    color: white;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    bottom: 0;
+    margin-top: 0px;
+    width: 100vw;
+    /* position: relative;
+    height: 90px;
+    background-color: red;
+    margin-top: -100px;
+    clear: both;
+    color: white;
+    height: 100px;
+    text-align: center; */
+}
+
+.page-content {
+    position: relative;
+    top: 75px;
+}
+
+/* CABEÇALHO */
+
+.navbar-principal {
+    width: 100%;
+    background-color: #000;
+    height: 75px;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.navbar-logo {
+    position: relative;
+    float: left;
+    height: 75px;
+}
+
+.logo-img {
+    width: 110px;
+    height: 63px;
+    margin-top: 7px;
+}
+
+.itens-navbar-meu {
+    margin-left: -38px;
+    width: 100%;
+    height: 100%;
+}
+
+.itens-navbar-meu li {
+    font-size: 1.8rem;
+    display: inline-block;
+    list-style: none;
+}
+
+.itens-navbar-meu li a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+    font-size: 1.8rem;
+}
+
+.itens-navbar-meu li a:hover {
+    color: #999;
+    transition-duration: 0.1s;
+}
+
+.itens-navbar-meu .itens-direita {
+    float: right;
+    margin-top: 20px;
+    position: relative;
+    margin-right: 15px;
+}
+
+.dropdown-meu ul li {
+    display: list-item !important;
+}
+
+.itens-navbar-meu .itens-esquerda {
+    width: 40%;
+    margin-top: 20px;
+    float: initial;
+    position: relative;
+}
+
+.itens-direita ul li input {
+    height: 30px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    width: 210px;
+    padding-left: 60px;
+    background-image: url('/static/teste_rifaki/imagens/lupa.png');
+    background-repeat: no-repeat;
+    background-position: 10%;
+    background-size: 16px 16px;
+    background-position-x: 32px;
+    background-position-y: 8.5px;
+    color: #fff;
+}
+
+.uk-dropdown-nav li a {
+    text-align: center;
+    margin: 0px;
+    text-decoration: none;
+    color: #999;
+    font-size: 1.6rem !important;
+    transition: 0.3s ease;
+}
+
+.uk-dropdown-nav li a:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+
+
+
+
+/* MOBILEEE */
+
+.itens-bar-mobile {
+    list-style: none;
+}
+
+.logo-img-mobile {
+    width: auto;
+    padding-top: 3px;
+    height: 80%;
+}
+
+.navbar-mobile-meu {
+    position: fixed !important;
+    width: 100vw;
+    height: 60px;
+    z-index: 9999;
+    top: calc(100vh - 60px);
+    background-color: #000 !important;
+}
+
+.lupa-pesquisa-mobile {
+    position: absolute;
+    right: 0;
+    top: -7px;
+    padding-left: 10%;
+}
+
+.barra-pesquisa {
+    font-size: 1.6rem;
+    font-weight: 0.7px;
+    padding-bottom: 5px;
+}
+
+.barra-pesquisa-m {
+    font-size: 1.8rem;
+    font-weight: 0.7px;
+    padding-bottom: 5px;
+}
+
+.user-menu-mobile-icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.add-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 3rem;
+    height: 3rem;
+}
+
+.lupa-pesquisa {
+    width: 3rem;
+    height: 3rem;
+}
+
+.nav-bar-mobile ul {
+    padding-top: 10px;
+    padding-left: 15px !important;
+}
+
+@media (max-width:960px) {
+    body {
+        height: 100%;
+        background-color: #1c1717;
+        margin-bottom: 100px;
+        width: 100vw;
+        /* altura do footer */
+    }
+}
+
+@media (min-width:700px) {
+    .add-button {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .user-menu-mobile-icon {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    .lupa-pesquisa {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    .barra-pesquisa-m {
+        font-size: 2.2rem;
+        font-weight: 0.9px;
+        padding-bottom: 5px;
+    }
+
+}

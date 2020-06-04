@@ -1,0 +1,133 @@
+{% extends 'teste_rifaki/html/base.html' %}  {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'compras/styles/view_carrinho.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+
+{% endblock main %}
+
+
+{% block content %}
+
+    <div class='container-tabela'>
+
+        {% if users_carrinho %}
+
+            <div class='page-top-content' style='margin-top: 60px;text-align:center;' >
+                <h2>Seu carrinho</h2>
+                <h3>Ultima modificação feita em: {{users_carrinho.data_ultima_modificacao}}</h3>
+            </div>
+
+            <div class='page-list-content'>
+                <div class='container-itens-list'>
+                    {% if itens_no_carrinho %}
+                        <div class='row-titulo'>
+                            <h1 class='label-imagens'>Imagem</h1>
+                            <h1 class='label-about'>Sobre o anúncio</h1>
+                            <label class='preco-do-numero'>Preço</label>
+                        </div>  
+                    {% comment %} <div class='item-card'>
+                        <img class='miniatura-anuncio' src="{% static 'teste_rifaki/imagens/carros/fusca4.jpeg' %}">
+                        <div class='anuncio-name-and-description'>
+                            <h1 class='titulo-anuncio'>Teste ahuahuhsuahsuhaushaushauhsuahsua</h1>
+                            <p class='uk-text-justify descricao-anuncio'>Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve</p>
+                        </div>
+                        <label class='preco-do-numero'>R$10.00</label>
+                        <button type="submit" id='btn-excluir' class="btn-excluir-anuncio uk-button uk-button-primary"><a href='' class='texto-btn-excluir'>Excluir</a></button>
+                    </div>
+                    <div class='item-card'>
+                        <img class='miniatura-anuncio' src="{% static 'teste_rifaki/imagens/carros/fusca4.jpeg' %}">
+                        <div class='anuncio-name-and-description'>
+                            <h1 class='titulo-anuncio'>Teste</h1>
+                            <p class='uk-text-justify descricao-anuncio'>Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve</p>
+                        </div>
+                        <label class='preco-do-numero'>R$10.00</label>
+                        <button type="submit" id='btn-excluir' class="btn-excluir-anuncio uk-button uk-button-primary"><a href='' class='texto-btn-excluir'>Excluir</a></button>
+                    </div>
+                    <div class='item-card'>
+                        <img class='miniatura-anuncio' src="{% static 'teste_rifaki/imagens/carros/fusca4.jpeg' %}">
+                        <div class='anuncio-name-and-description'>
+                            <h1 class='titulo-anuncio'>Teste</h1>
+                            <p class='uk-text-justify descricao-anuncio'>Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve Descrição breve</p>
+                        </div>
+                        <label class='preco-do-numero'>R$10.00</label>
+                        <button type="submit" id='btn-excluir' class="btn-excluir-anuncio uk-button uk-button-primary"><a href='' class='texto-btn-excluir'>Excluir</a></button>
+                    </div> {% endcomment %}
+
+                    
+                        {% for item in itens_no_carrinho %}
+                            <div class='item-card'>
+                                 <a href="/{{item.anuncio_escolhido.id}}/"><img class='miniatura-anuncio' src="media/{{item.anuncio_escolhido.getFirstImage}}"></a>
+                                <div class='anuncio-name-and-description'>
+                                    <h1 class='titulo-anuncio'>{{item.anuncio_escolhido.titulo_anuncio}}</h1>
+                                    <p class='uk-text-justify descricao-anuncio'>{{item.anuncio_escolhido.descricao_breve}}</p>
+                                </div>
+                                <label class='preco-do-numero'>R${{item.anuncio_escolhido.preco}}</label>
+                                <button type="submit" id='btn-excluir' class="btn-excluir-anuncio uk-button uk-button-primary"><a href="{{item.id}}/delete" class='texto-btn-excluir'>Excluir</a></button>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <h2 class='alert-carrinho-vazio'>Seu carrinho está vazio, aproveite para testar sua sorte, corra e garanta já seus números!</h2>    
+                    {% endif %}
+
+
+                    {% comment %} <table class="uk-table table">
+                        <tbody class='informacoes-user' style='list-style:none;'>
+                            
+                            {% if itens_no_carrinho %}
+                                <tr class='table-carrinho-row-c'>
+                                    <td class='row-titulo-c uk-text-uppercase'>Veículo</td>
+                                    <td class='row-titulo-c uk-text-uppercase'>número escolhido</td>
+                                    <td class='row-titulo-c uk-text-uppercase'>preço</td>
+                                    <td class='row-titulo-c uk-text-uppercase'></td>
+                                </tr>
+                                {% for itens in itens_no_carrinho %}
+                                    <tr class='table-carrinho-row-c'>            
+                                        <td class='item-info-c uk-text-uppercase' >{{itens.anuncio_escolhido.titulo_anuncio}}</td>
+                                        <td class='item-info-c uk-text-uppercase' >{{itens.numero_escolhido}}</td>
+                                        <td class='item-info-c uk-text-uppercase' ></td>
+                                        <td class='btn-excluir-carrinho'><button type="submit" id='btn-excluir' class="btn-excluir-anuncio uk-button uk-button-primary"><a href='' class='nome uk-text-uppercase'>Excluir</a></button></td>
+                                    </tr>
+                                {% endfor %} 
+                                <tr>            
+                                </tr>
+                            {% else %}
+                                <tr>            
+                                    <td class='item-info-c uk-text-uppercase'>seu carrinho está vazio, aproveite para testar sua sorte, corra e garanta já seus números da sorte!</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>  
+                    </table> {% endcomment %}
+                    {% if itens_no_carrinho %}
+                        <button type="submit" id='btn-finalizar' class="uk-button uk-button-primary btn-finalizar"><a href={% url 'cadastro:cria_categoria' %} class='texto-btn-finalizar uk-text-capfirst' style='text-decoration:none;color:white;font-size:1.8rem;'>Finalizar</a></button>
+                    {% else %}
+                        <button type="submit" id='btn-finalizar' class="uk-button uk-button-primary btn-finalizar"><a href={% url 'cadastro:cria_categoria' %} class='texto-btn-finalizar uk-text-capfirst' style='text-decoration:none;color:white;font-size:1.8rem;'> quero Testar minha sorte</a></button>
+                    {% endif %}
+                    </div>
+            </div>
+
+        {% else %}
+            <h2 class=''>Desculpe-nos, tivemos um problema com seu carrinho!</h2>
+        {% endif %}
+
+    </div>
+
+{% endblock  %}
+
+
+{% block footer %}
+        
+{% endblock footer %}
+
+{% block script %}
+    <script>
+    </script>
+{% endblock script %}
+

@@ -1,0 +1,77 @@
+.user-profile {
+    height: 1080px;
+}
+
+.sua-conta {
+    color: black;
+    margin-top: 2%;
+    font-weight: bold !important;
+    text-shadow: #171c1c;
+    font-size: 30px;
+}
+
+.table {
+    margin-top: 11%;
+}
+
+.informacoes-user {
+    margin-top: 11%;
+}
+
+.informacoes-user tr td {
+    color: black !important;
+    font-size: 19px;
+}
+
+.nome,
+.sobrenome,
+.username,
+.data_nascimento {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.btn-edit {
+    margin-left: 5px;
+}
+
+.btn-edit a,
+.btn-meus-anuncios a {
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+    width: 100%;
+}
+
+
+.btn-edit:hover a,
+.btn-meus-anuncios:hover a {
+    text-decoration: none;
+    color: #0198E1;
+}
+
+.uk-card-footer {
+    padding: 7px 0px;
+}
+
+.group-buttons {
+    display: flex;
+    float: right;
+    margin-right: 10px;
+}
+
+@media (min-width:1087px) {
+    .sec-form {
+        padding-top: 5%;
+    }
+}
+
+@media (max-width:737px) {
+    .sec-form {
+        padding-left: 0;
+    }
+
+    .o-card {
+        width: 90vw;
+    }
+}

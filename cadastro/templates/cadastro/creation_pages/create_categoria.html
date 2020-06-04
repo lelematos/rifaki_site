@@ -1,0 +1,30 @@
+{% extends 'teste_rifaki/html/base.html' %}   {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    <div id="main" class="user">
+{% endblock main %}
+
+
+{% block content %}
+    <div class='sec-form uk-position-top-left'>
+        <h2>Nova categoria</h2>
+        <form method="POST" class='form-group'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="uk-button uk-button-primary">{{btn_text}}</button>
+        </form>
+    </div>
+{% endblock  %}
+
+
+{% block footer %}
+        
+{% endblock footer %}

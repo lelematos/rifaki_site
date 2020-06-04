@@ -1,0 +1,187 @@
+{% extends 'teste_rifaki/html/base.html' %} {% load static %}
+
+{% load crispy_forms_tags %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/index.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    {% comment %} <div id="main" class="index"> {% endcomment %}
+{% endblock main %}
+
+
+{% block content %}
+    <!-- SLIDE DESTAQUES -->
+    <div id="carouselExampleIndicators" class="carousel slide" > {% comment %} data-ride="carousel" {% endcomment %}
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="width: 100%;">
+                <div class="img-container">
+                    <img class='d-block w-100 imagem-slideshow' src="{% static 'teste_rifaki/imagens/carros/fusca4.jpeg' %}" alt="">
+                </div>
+                <div class="desc-destaque uk-card-hover uk-card uk-card-default uk-card-body uk-card-small">
+                    <div class="uk-card-body card-body">
+                        <h1>Fusca 1964</h1>
+                        <h2>Motor 1.7 Caveira, <br />Roda Roletada</h2>
+                    </div>
+                    <div class="uk-card-footer">
+                        <h1>R$35,00</h1>
+                        <button
+                            class="uk-button uk-button-secondary uk-text-uppercase  uk-button-large uk-text-bold btn-mine">testar
+                            a sorte</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="width: 100%;">
+                <img class='d-block w-100 imagem-slideshow' src="{% static 'teste_rifaki/imagens/carros/chevete sl.jpg' %}" alt="" >
+                <div class="desc-destaque uk-card-hover uk-card uk-card-default uk-card-body uk-card-small">
+                    <div class="uk-card-body card-body">
+                        <h1>Chevette SL <br />1978</h1>
+                        <h2>Rodas ProStar</h2>
+                    </div>
+                    <div class="uk-card-footer">
+                        <h1>R$45,00</h1>
+                        <button
+                            class="uk-button uk-button-secondary uk-text-uppercase  uk-button-large uk-text-bold btn-mine">testar
+                            a sorte</button>
+                    </div>
+                </div>
+                {% comment %} <div class="desc-destaque-m uk-card-hover uk-card uk-card-default uk-card-body uk-card-small uk-hidden@s">
+                    <div class="uk-card-body" style='padding:0px !important;'>
+                        <h1>Chevette SL <br/> 1978</h1>
+                        <h2>Rodas ProStar</h2>
+                    </div>
+                    <div class="uk-card-footer card-footer-m">
+                        <h1>R$45,00</h1>
+                        <button
+                            class="uk-button uk-button-secondary uk-text-uppercase uk-button-small uk-text-bold btn-mine">testar
+                            a sorte</button>
+                    </div>
+                </div> {% endcomment %}
+
+            </div>
+            <a class="carousel-control-prev controle-slideshow-e" href="#carouselExampleIndicators" role="button" data-slide="prev"  >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next controle-slideshow-d" href="#carouselExampleIndicators" role="button" data-slide="next" >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- GRADIENTE -->
+    <div class="faixa-gradiente-destaques">
+    </div>
+    {% if resultados != None %}
+
+        {% if resultados %}
+            <ul class='c1' style='list-style:none;'>
+                <a href='/'>
+                    <ul class='comando-voltarr'>
+                        <li><span class="carousel-control-prev-icon v-icon" aria-hidden="true"> </span></li>
+                        <li class='voltar'><h1 class='btn-voltar'>VOLTAR</h1></li>
+                    </ul>
+                </a>
+                <li><h1 class='result-pesquisa'> Resultados da pesquisa: </h1></li>
+            </ul>
+            {% for expositor in controlador_expositores.getListaExpositores %}
+                {% if expositor.getAnuncios %}
+                    <div class="uk-position-relative uk-visible-toggle slider-meu " tabindex="-1" uk-slider>
+                        <button
+                            class="btn-secoes uk-button uk-button-secondary uk-text-uppercase uk-button-large">{{expositor.getNomeApresentavelCategoria}}</button>
+                        <ul class="uk-slider-items uk-child-width-auto uk-dark uk-slider-meu">
+                            {% for anuncio in expositor.getAnuncios %}
+                            <li class="uk-transition-toggle" tabindex="0">
+                                <a href="/{{anuncio.id}}/">
+                                    <img class='imagem-slider' src="" data-src="media/{{anuncio.getFirstImage}}" alt="">
+                                </a>
+                                <a href="/{{anuncio.id}}/">
+                                    <div class="uk-overlay uk-overlay-default uk-position-bottom card-desc-meu">
+                                        <h1>{{anuncio.titulo_anuncio}}</h1>
+                                        <h2></h2>
+                                        <button class="uk-button uk-button-primary uk-position-bottom-center btn-secoes" ><a class='uk-position-center ' uk-icon="chevron-down" href="/{{anuncio.id}}/">R${{anuncio.preco}}</a></button>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                            uk-slider-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                            uk-slider-item="next"></a>
+                        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin dotnav-meu"></ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <ul class='c1' style='list-style:none;'>
+                <a href='/'>
+                    <ul class='comando-voltarr'>
+                        <li><span class="carousel-control-prev-icon v-icon" aria-hidden="true"> </span></li>
+                        <li class='voltar'><h1 class='btn-voltar'>VOLTAR</h1></li>
+                    </ul>
+                </a>
+                <li><h1 class='result-pesquisa'> Infelizmente sua pesquisa não gerou resultados! </h1></li>
+            </ul>
+        {% endif %}    
+
+    {% else %}
+
+        <!-- expositores -->
+        {% for expositor in controlador_expositores.getListaExpositores %}
+            {% if expositor.getAnuncios %}
+                <div class="uk-position-relative uk-visible-toggle slider-meu " tabindex="-1" uk-slider>
+                    <button
+                        class="btn-secoes uk-button uk-button-secondary uk-text-uppercase uk-button-large">{{expositor.getNomeApresentavelCategoria}}</button>
+                    <ul class="uk-slider-items uk-child-width-auto uk-dark uk-slider-meu">
+                        {% for anuncio in expositor.getAnuncios %}
+                        <li class="uk-transition-toggle" tabindex="0">
+                            <a href="/{{anuncio.id}}/"><img class='imagem-slider' src="" data-src="media/{{anuncio.getFirstImage}}" alt=""></a>
+                            <div class="uk-overlay uk-overlay-default uk-position-bottom card-desc-meu">
+                                <h1>{{anuncio.titulo_anuncio}}</h1>
+                                <h2></h2>
+                                <button class="uk-button uk-button-primary uk-position-bottom-center btn-secoes" ><a class='uk-position-center ' uk-icon="chevron-down" href="/{{anuncio.id}}/">R${{anuncio.preco}}</a></button>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                        uk-slider-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                        uk-slider-item="next"></a>
+                    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin dotnav-meu"></ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+
+    
+    
+
+{% endblock content %}
+
+
+{% block footer %}
+
+{% endblock footer %}
+
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js"></script>
+    
+    <script> 
+        var lazyLoadInstance = new LazyLoad({
+            elements_selector: ".imagem-slider"
+        });
+    
+    </script>
+{% endblock script %}

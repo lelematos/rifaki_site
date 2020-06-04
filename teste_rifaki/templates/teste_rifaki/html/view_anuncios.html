@@ -1,0 +1,82 @@
+{% extends 'teste_rifaki/html/base.html' %} {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/view_anuncios.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    {% comment %} <div id="main" class="meus-anuncios">  {% endcomment %}
+{% endblock main %}
+
+
+{% block content %}
+{% if controlador_expositores.numeroDeAnunciosNosExpositores %}
+    {% for expositor in controlador_expositores.getListaExpositores %}
+        {% if expositor.getAnuncios %}
+            <div class="uk-position-relative uk-visible-toggle slider-principais-meu" tabindex="-1" uk-slider>
+                <button
+                    class="btn-mine uk-button uk-button-secondary uk-text-uppercase uk-button-large">{{expositor.getNomeApresentavelCategoria}}</button>
+                <ul class="uk-slider-items uk-child-width-auto uk-dark uk-slider-meu">
+                    {% for anuncio in expositor.getAnuncios %}
+                        <div class='card-anuncio'>
+                            <li class="uk-transition-toggle flex-align-center" tabindex="0">
+                                <a href="/{{anuncio.id}}/"><img class='imagem-slider' src='' data-src="media/{{anuncio.getFirstImage}}" alt=""></a>
+                                {% comment %} <div class="uk-overlay uk-overlay-default uk-position-bottom card-desc-meu">
+                                    <h1>{{anuncio.titulo_anuncio}}</h1>
+                                    <h2></h2>
+                                    <button class="uk-button uk-button-primary uk-position-bottom-center"><a class='uk-text-uppercase' href="/cadastro/{{anuncio.id}}/edit/">editar</a></button>
+                                </div> {% endcomment %}
+                            </li>
+                            <div class='anuncio-infos'>
+                                <h1 class='titulo'>{{anuncio.titulo_anuncio}}</h1>
+                                <h2></h2>
+                                <div class='group-buttons'>
+                                    <button class="uk-button uk-button-primary black-button "><a class='texto-grey-button' href="/cadastro/{{anuncio.id}}/edit/">editar</a></button>
+                                    <button class="uk-button uk-button-primary black-button "><a class='texto-grey-button' href="/compras/{{anuncio.id}}/analisar/">analisar</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                    uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                    uk-slider-item="next"></a>
+                <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div class='centered-message'>
+        <h1> Você não possui anúncios publicados! </h1>
+    </div>
+
+{% endif %}
+
+
+{% endblock  %}
+
+
+{% block footer %}
+        
+{% endblock footer %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@16.0.0/dist/lazyload.min.js"></script>
+    
+    <script> 
+        var lazyLoadInstance = new LazyLoad({
+            elements_selector: ".imagem-slider"
+        
+        });
+    
+    </script>
+{% endblock script %}
+{% comment %} ="{% url 'cadastro:edit_anuncio' %} {% endcomment %}

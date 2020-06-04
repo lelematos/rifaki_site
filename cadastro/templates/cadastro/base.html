@@ -1,0 +1,264 @@
+ {% load static %}<!DOCTYPE html>
+ <html>
+    <head>
+        <title>Rifaki</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/uikit/css/uikit.min.css' %}" />
+        <script src="{% static 'teste_rifaki/styles/uikit/js/uikit.min.js' %}"></script>
+        <script src="{% static 'teste_rifaki/styles/uikit/js/uikit-icons.min.js' %}"></script>
+
+        {% block head %}
+        
+        {% endblock head %}
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://jquery-textfill.github.io/js/textfill/jquery.textfill.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/base.css' %}">
+
+        <style>
+            .itens-direita ul li input {                
+                background-image: {% static 'teste_rifaki/imagens/carros/fusca4.jpeg' %};
+            }
+        </style>    
+    </head>
+    
+    <body>
+        <main id='container' class='container' role='main'> 
+            {% block main %}
+            
+            {% endblock main %}
+                <header>
+
+                    {% comment %}  NAV BAR PRINCIPAL - VERSAO MOBILE {% endcomment %}
+                    <nav class="uk-navbar uk-navbar-container uk-margin navbar-mobile-meu uk-hidden@m">
+                        <div class="uk-navbar-left nav-bar-mobile">
+                            {% comment %} <a class="uk-navbar-toggle drawer" id="uk-navbar-toggle" uk-icon="icon: user; ratio: 1.5" uk-toggle="target: #offcanvas-nav-primary" href="#"></a>
+                                {% endcomment %}
+                            <ul>
+                                {% if  user.is_authenticated %}
+                                    <a class="uk-text-uppercase" href="">
+                                        <svg class="bi bi-person-square user-menu-mobile-icon" width="2.5em" height="2.5em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                            <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                    </a>
+                                    <div uk-dropdown="pos: bottom-justify; mode: click" class='dropdown-meu'>
+                                        <ul class="uk-nav uk-dropdown-nav ">
+                                            <li><a href="{% url 'teste_rifaki:view_profile_anuncios' %}" class='uk-text-uppercase'>meus anúncios</a></li>
+                                            <li><a href="{% url 'compras:view_carrinho' %}" class='uk-text-uppercase'>meu carrinho</a></li>
+                                            <li><a href="{% url 'cadastro:view_profile' %}" class='uk-text-uppercase'>minha conta</a></li>
+                                            {% if user.is_superuser %}
+                                                <li class="uk-nav-divider"></li>
+                                                <li><a href="/admin/" class='uk-text-uppercase'>área admin</a></li>
+                                                <li><a href={% url 'cadastro:view_categorias' %} class='uk-text-uppercase'>Categorias</a></li>
+                                            {% endif %}
+                                            <li class="uk-nav-divider"></li>
+                                            <li><a href="/logout" class='uk-text-uppercase'>sair</a></li>
+                                        </ul>
+                                    </div>
+                                {% else %}
+                                    <a class="uk-text-uppercase" href="/login">
+                                        <svg class="bi bi-person user-menu-mobile-icon" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                        </div>
+                        <ul class="itens-bar-mobile">
+                            <li class="navbar-logo uk-position-top-center" id='mobile-logo'>
+                                <a href="{% url 'teste_rifaki:index' %}">
+                                    <img class="logo-img-mobile " src="{% static 'teste_rifaki/imagens/Capturar.png' %}" >
+                                </a>
+                            </li>
+                            <li class='lupa-pesquisa-mobile'>
+                                <div class="nav-overlay uk-navbar-right">
+                                    <a class="uk-navbar-toggle" uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                                        <svg class="bi bi-search lupa-pesquisa" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>
+                                    <div class="uk-navbar-item uk-width-expand">
+                                        <form class="uk-search uk-search-navbar uk-width-1-1">
+                                            <input id='mobile-search' class="uk-search-input barra-pesquisa-m uk-text-uppercase" type="search"  name='q' placeholder="PESQUISAR" autofocus>
+                                        </form>
+                                    </div>
+                                    <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class='add-button uk-hidden@m' id='add-button-m'>
+                        {% if  user.is_authenticated %}
+                            <a href="{% url 'cadastro:cadastro_anuncio' %}">
+                                <svg class="bi bi-plus-circle-fill add-button" viewBox="0 0 16 16" fill="#484848" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
+                                </svg>
+                            </a>
+                        {% else %}
+                            <a href="/login">
+                                <svg class="bi bi-plus-circle-fill add-button" viewBox="0 0 16 16" fill="#484848" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5V4z"/>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% comment %} END MOBILE NAV {% endcomment %}
+                    
+                    {% comment %}  NAV BAR PRINCIPAL - VERSAO DESKTOP {% endcomment %}
+                    <nav class="navbar-principal fixed-top uk-visible@m">
+                        <ul class="itens-navbar-meu">
+                            <li class="navbar-logo">
+                                    <a href="{% url 'teste_rifaki:index' %}">
+                                        <img class="logo-img" src="{% static 'teste_rifaki/imagens/Capturar.png' %}" >
+                                    </a>
+                                </li>
+                                <li class="itens-esquerda">
+                                    <ul>
+                                        <button class="uk-button uk-button-default" type="button"> <a class="uk-text-uppercase" href="{% url 'teste_rifaki:index' %}">op1</a></button>
+
+                                        {% if  user.is_authenticated %}
+                                            <button class="uk-button uk-button-default" type="button"> <a class="uk-text-uppercase" href="{% url 'cadastro:cadastro_anuncio' %}">anunciar</a></button>
+                                        {% else %}
+                                            <button class="uk-button uk-button-default" type="button"> <a class="uk-text-uppercase" href="/login">anunciar</a></button>                               
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="itens-direita">
+                                <ul>
+                                    <li class="barra-pesquisa">
+                                        <form method='get'>
+                                            <input type="text"  placeholder="PESQUISAR" name='q' style='font-size = 1.6rem' value={{query}}>
+                                        </form>
+                                    </li>
+                                    {% if  user.is_authenticated %}
+                                        <button class="uk-button uk-button-default" type="button"><a class="uk-text-uppercase" href="">{{ user.get_username }}</a></button>
+                                        <div uk-dropdown="pos: bottom-justify" class='dropdown-meu'>
+                                            <ul class="uk-nav uk-dropdown-nav ">
+                                                <li><a href="{% url 'teste_rifaki:view_profile_anuncios' %}" class='uk-text-uppercase'>meus anúncios</a></li>
+                                                <li><a href="{% url 'cadastro:view_profile' %}" class='uk-text-uppercase'>minha conta</a></li>
+                                                {% if user.is_superuser %}
+                                                    <li class="uk-nav-divider"></li>
+                                                    <li><a href="/admin/" class='uk-text-uppercase'>área admin</a></li>
+                                                    <li><a href={% url 'cadastro:view_categorias' %} class='uk-text-uppercase'>Categorias</a></li>
+                                                {% endif %}
+                                                <li class="uk-nav-divider"></li>
+                                                <li><a href="/logout" class='uk-text-uppercase'>sair</a></li>
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <button class="uk-button uk-button-default" type="button"><a class="uk-text-uppercase" href="/login">Login</a></button>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </header>
+                
+                <div class="page-content">
+                    {% block content %}
+                    
+                    {% endblock content %}
+                </div>
+
+                <div class="offcanvas-seletor">
+                    {% block offcanvas %}
+                    
+                    {% endblock offcanvas %}
+                </div>
+        </main>    
+        {% comment %} uk-width-auto@m uk-visible@l {% endcomment %}
+
+        <footer class="footer uk-visible@m" id='footer'>
+            <div class='container '> 
+                <h2> Texto Texto Texto Texto </h2>
+            {% block footer %}
+        
+            {% endblock footer %}
+            </div>
+        </footer>
+        {% comment %} <footer class="footer-m uk-hidden@m" id='footer-m'>
+            <div class='container '> 
+                <h2> Texto Texto Texto Texto </h2>
+            {% block footer2 %}
+        
+            {% endblock footer2 %}
+            </div>
+        </footer> {% endcomment %}
+        
+        {% block script %}
+            <script>
+                var search_bar_mobile = document.getElementById('mobile-search');
+                var mobile_logo = document.getElementById('mobile-logo');
+                var offcanvas = document.getElementById('offcanvas-nav-primary');
+                var footer_m = document.getElementById('footer-m');
+                var nav_bar_toogle = document.getElementById('uk-navbar-toggle');
+
+                function addFocusBlurToField(event_field, class_to_add_and_remove, class_owner){
+                    event_field.addEventListener('focus', ()=>{
+                        class_owner.classList.add(class_to_add_and_remove);
+                    });
+
+                    event_field.addEventListener('blur', ()=>{
+                        class_owner.classList.remove(class_to_add_and_remove);
+                    });
+                }
+
+                {% comment %} function offcanvasIsOpen(some_offcanvas){
+                    if(some_offcanvas.classList.includes('uk-open')){
+                        return(true);
+                    } else {
+                        return(false);
+                    }
+                }
+
+                function labelVisibilityState(label, boolean){
+                    if(boolean){
+                        label.classList.remove('uk-hidden');
+                    } else {
+                        label.classList.add('uk-hidden');
+                    }
+                } {% endcomment %}
+
+                addFocusBlurToField(search_bar_mobile, 'uk-hidden', mobile_logo);
+
+                {% comment %} nav_bar_toogle.onclick = () => {
+                    labelVisibilityState(footer_m, false);
+                }
+
+                offcanvas.addEventListener('opened', ()=>{
+                    console.log('mudei');
+                })
+
+                addFocusBlurToField(offcanvas, 'uk-hidden', footer_m); {% endcomment %}
+
+
+
+                {% comment %} search_bar_mobile.addEventListener('focus', ()=>{
+                    mobile_logo.classList.add('uk-hidden');
+                });
+
+                search_bar_mobile.addEventListener('blur', ()=>{
+                    mobile_logo.classList.remove('uk-hidden');
+                }); {% endcomment %}
+
+
+
+            </script>
+        {% endblock script %}
+    </body>
+</html>

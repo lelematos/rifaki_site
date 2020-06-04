@@ -1,0 +1,135 @@
+.container-analisador {
+    margin-top: 100px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.row-estatisticas {
+    width: auto;
+    height: auto;
+    display: flex;
+}
+
+.row-estatisticas .contorno-valores div label {
+    color: #17171c;
+    font-size: 2.2rem;
+}
+
+.contorno-valores {
+    margin: 5px 5px;
+    display: inline-flex;
+    background-color: transparent;
+    border: 2px solid #17171c;
+    border-radius: 3px;
+}
+
+.text-value {
+    background-color: #17171c;
+}
+
+.text-value label {
+    padding: 0 8px;
+    color: white !important;
+}
+
+.value label {
+    padding: 0 10px;
+    font-weight: bolder;
+}
+
+/* content section */
+
+.infos-gerais {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-recursos {
+    margin: 8px;
+    background-color: transparent;
+    border: 2px solid #17171c;
+    border-radius: 3px;
+    width: 30%;
+    height: auto;
+}
+
+.titulo-box {
+    padding: 5px 0;
+    background-color: #17171c;
+}
+
+.titulo-box label {
+    padding-left: 10px;
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    font-size: 2.2rem;
+}
+
+.content-box {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.row-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row-info label {
+    padding-left: 10px;
+    font-size: 2.2rem;
+    margin: 2px 30px;
+}
+
+/*  form section */
+
+.form-block {
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.form-group label {
+    color: black !important;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group div input {
+    color: black !important;
+    border: 2px solid black;
+    height: 35px;
+    font-size: 2rem;
+}
+
+/*  error  */
+.invalid-feedback strong {
+    font-size: 1.5rem;
+}
+
+.black-button {
+    padding: 0 10px;
+    margin: 5px;
+    font-size: 1.8rem;
+    font-weight: 650;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    border: 2px solid black;
+    line-height: 32px;
+}
+
+.black-button:hover {
+    padding: 0 10px;
+    margin: 5px;
+    font-size: 1.8rem;
+    font-weight: 650;
+    color: #0198E1;
+    background-color: black;
+    border-radius: 6px;
+    border: 2px solid black;
+    line-height: 32px;
+}

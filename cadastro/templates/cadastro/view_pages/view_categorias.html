@@ -1,0 +1,54 @@
+{% extends 'teste_rifaki/html/base.html' %}   {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    <div id="main" class="user">
+{% endblock main %}
+
+
+{% block content %}
+    <div class='sec-form uk-position-top-left'>
+        <h2>Lista de categorias</h2>
+         <table class="uk-table uk-table-striped table">
+            <tbody class='informacoes-user' style='list-style:none;'>
+                <tr>
+                    <td class='row-titulo-base'>Nome</td>
+                    <td class='row-titulo-base'>Código</td>
+                    <td class='row-titulo-base' ></td>
+                    <td class='row-titulo-base' ></td>
+                </tr>
+                {% for categoria in lista_categorias_existentes %}
+                    <tr>            
+                        <td class='item-info' style='color:grey; font-weight:700;'>{{categoria.nome_apresentavel}}</td>
+                        <td class='item-info' style='color:grey; font-weight:700;'>{{categoria.nome}}</td>
+                        <td><button type="submit" id='btn-excluir' class="btn-ver-carrinho uk-button uk-button-primary"><a href='{{categoria.id}}/edit' class='nome uk-text-uppercase' style='text-decoration:none;color:white;'>Editar</a></button></td>
+                        <td><button type="submit" id='btn-excluir' class="btn-ver-carrinho uk-button uk-button-primary"><a href='{{categoria.id}}/delete' class='nome uk-text-uppercase' style='text-decoration:none;color:white;'>Excluir</a></button></td>
+                    </tr>
+                {% endfor %}    
+            </tbody>  
+        </table>
+        <button type="submit" id='btn-excluir' class="btn-ver-carrinho uk-button uk-button-primary"><a href={% url 'cadastro:cria_categoria' %} class='nome uk-text-uppercase' style='text-decoration:none;color:white;'>Adicionar categoria</a></button>
+    </div>
+{% endblock  %}
+
+
+{% block footer %}
+        
+{% endblock footer %}
+
+{% block script %}
+    <script>
+        btn_excluir = document.getElementById('btn-excluir');
+
+        btn_excluir.onclick = () => {
+
+        }
+    </script>
+{% endblock script %}

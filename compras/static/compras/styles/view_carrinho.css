@@ -1,0 +1,519 @@
+.container-tabela {
+    margin: 5px 11vw;
+}
+
+.alert-carrinho-vazio {
+    margin-top: 40px;
+    color: white !important;
+    font-weight: bold;
+    font-size: 2.2rem !important;
+}
+
+.page-top-content h2 {
+    color: white !important;
+    font-weight: bold;
+    font-size: 2.2rem !important;
+}
+
+.page-top-content h3 {
+    color: white !important;
+    font-size: 1.8rem !important;
+}
+
+.row-titulo-c {
+    color: white !important;
+    font-weight: bold;
+    font-size: 1.8rem !important;
+}
+
+.item-info-c {
+    color: white !important;
+    font-size: 1.8rem !important;
+}
+
+
+.btn-excluir-carrinho-c button a {
+    text-decoration: none;
+    color: white !important;
+    font-size: 1.5rem !important;
+}
+
+.btn-excluir-carrinho-c button a:hover {
+    font-weight: initial;
+}
+
+.table-carrinho-row-c {
+    text-align: center !important;
+}
+
+
+
+
+.container-itens-list {
+    margin-top: 40px;
+    display: grid;
+}
+
+.row-titulo {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    background: #454343;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 8px -1px #757575; */
+    display: flex;
+}
+
+/* .row-titulo .titulo-anuncio {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: white;
+    width: 270px;
+    text-align: center;
+} */
+
+.label-imagens {
+    padding: 10px;
+    font-size: 1.9rem;
+    width: 270px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
+
+.label-about {
+    text-align: left !important;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    left: 47px;
+    width: 28vw !important;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.row-titulo .preco-do-numero {
+    color: white;
+    font-weight: 600;
+    font-size: 1.9rem;
+    padding: 0;
+    position: relative;
+    left: 10vw;
+    padding-top: 5px;
+}
+
+.row-titulo .anuncio-name-and-description h1 {
+    width: 100%;
+    text-align: left;
+}
+
+
+.item-card {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    background: #454343;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 8px -1px #757575; */
+    display: flex;
+}
+
+.miniatura-anuncio {
+    height: 153px;
+    padding: 10px;
+    border-radius: 17px;
+}
+
+.anuncio-name-and-description {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    left: 55px;
+    width: 28vw;
+}
+
+.titulo-anuncio {
+    font-size: 2.9rem;
+    font-weight: 600;
+    color: white;
+    word-break: break-all;
+}
+
+.descricao-anuncio {
+    word-break: keep-all;
+    width: 28vw;
+    font-size: 1.5rem;
+    height: 60px;
+    color: white;
+    overflow-y: hidden;
+}
+
+.descricao-anuncio:hover {
+    overflow-y: scroll;
+}
+
+.preco-do-numero {
+    padding-top: 55px;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    left: 10vw;
+    text-align: left;
+    margin: 0;
+}
+
+.btn-excluir-anuncio {
+    margin-left: auto;
+    height: 25%;
+    background: #757575;
+    border-radius: 6px;
+    border: transparent;
+    position: relative;
+    right: 4vw;
+    top: 55px;
+    line-height: 34px;
+}
+
+
+.texto-btn-excluir {
+    text-transform: capitalize !important;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 650;
+}
+
+.texto-btn-excluir:hover {
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 650;
+}
+
+.btn-finalizar {
+    text-transform: capitalize;
+    float: right;
+    margin-right: 1vw;
+    border-radius: 6px;
+    margin-top: 25px;
+    width: 265px;
+}
+
+.texto-btn-finalizar {
+    color: white;
+    font-size: 1.8rem;
+}
+
+@media(max-width:1288px) {
+    .container-tabela {
+        margin: 10px 3vw;
+    }
+
+    .anuncio-name-and-description {
+        left: 20px;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.1rem;
+    }
+
+    .label-about {
+        left: 12px;
+    }
+}
+
+/* @media(max-width:1082px) {
+
+    body {
+        margin-bottom: 130px !important;
+    }
+
+    .container-itens-list {
+        margin-top: 65px;
+        display: grid;
+    }
+
+    .btn-finalizar {
+        margin-top: 25px;
+    }
+
+    .page-list-content {
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+    .page-content {
+        top: auto !important;
+    }
+
+    .row-titulo .preco-do-numero {
+        left: 6vw;
+    }
+
+    .preco-do-numero {
+        left: 6vw;
+    }
+}
+
+
+
+/* @media(max-width:964px) {
+
+    .row-titulo .preco-do-numero {
+        left: 0vw;
+    }
+
+    .preco-do-numero {
+        left: 0vw;
+    }
+} */
+
+@media(max-width:858px) {
+
+    /* 796 */
+    html {
+        font-size: 50%;
+    }
+
+    /* titulo */
+    .row-titulo {
+        height: 30px;
+    }
+
+    .label-about {
+        padding-top: 5px;
+    }
+
+    .row-titulo .preco-do-numero {
+        padding-top: 2px;
+    }
+
+    .label-imagens {
+        padding-top: 5px;
+    }
+
+    /*  card */
+    .texto-btn-excluir {
+        font-size: 1.7rem;
+    }
+
+    .texto-btn-excluir:hover {
+        font-size: 1.7rem;
+    }
+
+    .btn-excluir-anuncio {
+        right: 2vw;
+    }
+
+    .anuncio-name-and-description {
+        /* overflow: hidden; */
+        height: 138px;
+    }
+
+    .row-titulo .preco-do-numero {
+        left: 0vw;
+    }
+
+    .preco-do-numero {
+        left: 0vw;
+    }
+
+}
+
+/* 
+@media (max-width:746px) {
+    .miniatura-anuncio {
+        height: 115px;
+    }
+
+    .label-imagens {
+        width: 199px;
+    }
+
+    .item-card {
+        height: 115px;
+    }
+
+    .descricao-anuncio {
+        visibility: hidden;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.1rem;
+        width: 200px;
+    }
+
+    .preco-do-numero {
+        padding-top: 38px;
+    }
+
+    .btn-excluir-anuncio {
+        line-height: 26px !important;
+    }
+
+    .btn-excluir-anuncio {
+        top: 40px;
+    }
+}*/
+
+@media (max-width:664px) {
+
+    /* 698 */
+    .page-list-content {
+        margin-top: -45px;
+    }
+
+    /* .miniatura-anuncio {
+        height: 85px;
+        margin-top: 34px;
+    } */
+
+    .row-titulo {
+        visibility: hidden;
+    }
+
+    .anuncio-name-and-description {
+        height: 32px;
+        width: 57%;
+        position: absolute;
+        left: 230px;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.2rem;
+        width: 100%;
+    }
+
+    .descricao-anuncio {
+        visibility: hidden;
+    }
+
+    .preco-do-numero {
+        padding-top: 74px;
+        text-align: right;
+        left: 3vw;
+    }
+
+    .btn-excluir-anuncio {
+        right: 4vw;
+        height: 35px;
+        margin-top: 18px;
+    }
+
+    .miniatura-anuncio {
+        height: 115px;
+    }
+
+    .label-imagens {
+        width: 199px;
+    }
+
+    .item-card {
+        height: 115px;
+    }
+}
+
+
+@media (max-width:524px) {
+
+    /* quebra no tamanho do titulo */
+    /* 
+    .miniatura-anuncio {
+        height: 77px;
+    }
+
+    .anuncio-name-and-description {
+        left: 143px;
+    }
+
+    .preco-do-numero {
+        padding-top: 39px;
+        left: 2vw;
+        font-size: 2rem;
+    }
+
+    .item-card {
+        height: 75px;
+    }
+
+    .btn-excluir-anuncio {
+        right: 2vw;
+        height: 24px;
+        margin-top: -14px;
+        line-height: 9px !important;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.2rem;
+        width: 100%;
+        overflow-x: scroll;
+    } */
+}
+
+@media (max-width:404px) {
+    .miniatura-anuncio {
+        height: 77px;
+    }
+
+    .anuncio-name-and-description {
+        left: 143px;
+    }
+
+    .preco-do-numero {
+        padding-top: 39px;
+        left: 2vw;
+        font-size: 2rem;
+    }
+
+    .item-card {
+        height: 75px;
+    }
+
+    .btn-excluir-anuncio {
+        right: 2vw;
+        height: 24px;
+        margin-top: -14px;
+        line-height: 9px !important;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.2rem;
+        width: 100%;
+        overflow-x: scroll;
+    }
+}
+
+/* 
+@media (max-width:610px) {
+    .page-list-content {
+        margin-top: -45px;
+    }
+
+    .miniatura-anuncio {
+        height: 85px;
+        margin-top: 34px;
+    }
+
+    .row-titulo {
+        visibility: hidden;
+    }
+
+    .anuncio-name-and-description {
+        height: 32px;
+        width: 90%;
+        position: absolute;
+        left: 5vw;
+    }
+
+    .titulo-anuncio {
+        font-size: 2.2rem;
+        width: 100%;
+    }
+
+    .btn-excluir-anuncio {
+        right: 4vw;
+        height: 35px;
+        margin-top: 18px;
+    }
+} */

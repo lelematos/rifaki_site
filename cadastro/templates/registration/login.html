@@ -1,0 +1,42 @@
+{% extends 'teste_rifaki/html/base.html' %}  {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    <div id="main" class="login">
+{% endblock main %}
+
+
+{% block content %}
+    <div class='sec-form uk-position-top-center'>
+        <h2>Entrar</h2>
+        <form method="POST" class='form-group'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <p>Ainda não é um sortudo, crie já sua conta <a href="/cadastro/user">aqui</a></p>
+            <button type="submit" class="uk-button uk-button-primary">Login</button>
+        </form>
+    </div>
+{% endblock  %}
+
+
+{% block footer %}
+        
+{% endblock footer %}
+
+{% block script %}
+    <script>
+        var add_m_button = document.getElementById('add-button-m');
+
+        add_m_button.classList.add('uk-hidden');
+    </script>
+{% endblock script %}
+
+
+

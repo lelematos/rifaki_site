@@ -1,0 +1,81 @@
+{% extends 'teste_rifaki/html/base.html' %}   {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'cadastro/styles/form-style.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+{% endblock main %}
+
+
+{% block content %}
+    <div class='sec-form uk-position-top-center'>
+        <div class='uk-card uk-card-default o-card'>
+            <div class='uk-card-title'>
+                 <h1 class ='uk-position-top-center uk-text-uppercase sua-conta'>Sua conta</h1>
+            </div>
+           
+            <div class='uk-card-body card-body'>
+                <table class="uk-table uk-table-striped table">
+                    <tbody class='informacoes-user' style='list-style:none;'>
+                        <tr>            
+                            <td class='nome uk-text-uppercase' style='color:white;'>Nome: </td>
+                            <td class='nome-user uk-text-uppercase' style='color:white;'>{{ usuario.first_name }}</td>
+                        </tr>
+                        <tr>            
+                            <td class='sobrenome uk-text-uppercase' style='color:white;'>Sobrenome: </td>
+                            <td class='sobrenome-user uk-text-uppercase' style='color:white;'>{{ usuario.last_name }}</td>
+                        </tr>
+                        <tr>            
+                            <td class='username uk-text-uppercase' style='color:white;'>Usuário: </td>
+                            <td class='username-user uk-text-uppercase' style='color:white;'>{{ usuario.username }}</td>
+                        </tr>
+                        <tr>            
+                            <td class='data_nascimento uk-text-uppercase' style='color:white;'>Data de nascimento: </td>
+                            <td class='data_nascimento-user uk-text-uppercase' style='color:white;'>{{ usuario.m_data_nascimento }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='uk-card-footer card-footer-meu'>
+                <div class='group-buttons'>
+                    <button class='uk-button uk-button-secondary btn-meus-anuncios uk-text-uppercase'><a href="{% url 'teste_rifaki:view_profile_anuncios' %}">Meus anuncios</a></button>
+                    <button class='uk-button uk-button-secondary btn-edit uk-text-uppercase' ><a href="{% url 'cadastro:edit_profile' %}">Editar perfil</a></button>    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+        
+{% endblock footer %}
+
+{% block script %}
+    <script>
+    {% comment %} 
+        var input_Nome = document.getElementsById('id_first_name')
+        var input_sNome = document.getElementsById('id_last_name')
+        var input_user = document.getElementsById('id_username')
+        var input_email =  document.getElementsById('id_email')
+        var inpu_dNascimento = document.getElementsById('id_data_nascimento') 
+        var input_senha = document.getElementsById('id_password1') 
+
+        function addPlaceholder(input_guy):
+            input_guy.placeholder ="{{ user.get }}"; 
+    {% endcomment %}
+        {% comment %} var btn_meusAnuncios = document.getElementsByClassName('.btn-meus-anuncios')
+
+        btn_meusAnuncios.onclick = function (){
+
+        } {% endcomment %}
+
+    </script> 
+{% endblock script %}

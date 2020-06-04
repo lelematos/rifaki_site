@@ -1,0 +1,1359 @@
+{% extends 'teste_rifaki/html/base.html' %} {% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'teste_rifaki/styles/detail.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+{% comment %} <div id="main" class="detail" style="height: 2300px;"> {% endcomment %}
+{% endblock main %}
+
+
+{% block content %}
+    <!-- SLIDESHOW+SELETOR DE NUMEROS+INFOS+TITULO+COMPRAR -->
+    <div class="sec-exposicao">
+        <div class="uk-position-relative expositor-meu" uk-slideshow="animation: fade"> 
+            <ul class="uk-slideshow-items">
+
+                {% for i in anuncio.getListOfImages %}
+                    <li>
+                        <img src="media/{{ i }}" alt="" uk-cover>  <!-- CAMINHO DAS IMAGENS DO CARRO -->
+                    </li>
+                {% endfor %}
+                
+            </ul>
+            <!-- -------------------------------------ALTERAÇÃO AQUIIIIIII ----------------------------------->
+            <!-- GRADIENTE -->
+            <div class="faixa-gradiente-destaques-detail">
+            </div>
+            <div class="faixa-fundo">
+            </div>
+            <!-- ------------------------------------------------------------------------------------------- -->
+            <div class="uk-position-center-left uk-position-small miniaturas-meu">
+                <ul class="uk-thumbnav thumbnav-meu">
+
+                    {% for i in anuncio.getListOfImages %}
+                        <li uk-slideshow-item={{forloop.counter0}}><a href="#"><img id="1" src="media/{{ i }}" width="100" alt=""></a></li> <!-- CAMINHO DAS IMAGENS DO CARRO -->                     
+                    {% endfor %}
+
+                </ul>
+            </div>
+            
+        
+        </div>
+        <div class="informacoes-veiculo-direita">
+            <div class="titulo-veiculo uk-text-center@s">
+                <h1 style="color: {{anuncio.text_color}};">
+                    {{ anuncio.titulo_anuncio }}
+                </h1>
+            </div>  
+            <div class="descricao-breve uk-panel uk-panel-box uk-text-break uk-text-justify " style="color: {{anuncio.text_color}};">
+                {{ anuncio.descricao_breve }}  
+            </div>
+            <div class="seletor-numeros uk-position-center">
+                <div class="card-seletor-numeros uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+                    <h3 class="uk-card-title uk-card-title-meu ">Seletor de números</h3>
+                    <ul class="seletores-0500">
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-099"><span class="uk-text-center@s">000-099</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-199"><span class="uk-text-center@s">100-199</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-299"><span class="uk-text-center@s">200-299</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-399"><span class="uk-text-center@s">300-399</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-499"><span class="uk-text-center@s">400-499</span></a></li>
+                    </ul>
+                    <ul class="seletores-5001000">
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-599"><span class="uk-text-center@s">500-599</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-699"><span class="uk-text-center@s">600-699</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-799"><span class="uk-text-center@s">700-799</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-899"><span class="uk-text-center@s">800-899</span></a></li>
+                        <li><a href="#" class="dot" uk-toggle="target: #offcanvas-999"><span class="uk-text-center@s">900-999</span></a></li>
+                    </ul>
+                </div>
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <div class="secao-pagamento"> {% endcomment %}
+                <div class="card-pagamento uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+                    <h2>Números selecionados:</h2>
+                    {% if user.is_authenticated %}
+                        <form method='post'>
+                            {% csrf_token %}
+                            <input type='text' class='label-numeros-selecionados' name='num_selected' readonly="readonly">
+                            <button type='submit' class="btn-relizar-pg uk-text-uppercase">Adicionar ao carrinho</button>
+                        </form>     
+                    {% else %}
+                        <a href="/login/">
+                            <button type='submit' class="btn-relizar-pg uk-text-uppercase">Fazer login</button>    
+                        </a<
+                    {% endif %}
+                                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESCRICAO INFERIOR -->
+    <div class="sec-descricao">
+        <div class="desc-content uk-text-break uk-text-justify">
+            <h1>Regulamento/Descrição:<br></h1>
+                {{ anuncio.descricao_completa }}  
+        </div>
+    </div>
+{% endblock content %}
+
+{% block offcanvas %}
+    <!-- OFFCANVAS -->
+    <div class="offcanvas-seletor">
+        <div id="offcanvas-099" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>000 - 099</h3>
+                <ul class="seletores-099">
+                    <li><a href="#" class="dot-mini inativo" id="000"><span class="uk-text-center@s">000</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="001"><span class="uk-text-center@s">001</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="002"><span class="uk-text-center@s">002</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="003"><span class="uk-text-center@s">003</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="004"><span class="uk-text-center@s">004</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="005"><span class="uk-text-center@s">005</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="006"><span class="uk-text-center@s">006</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="007"><span class="uk-text-center@s">007</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="008"><span class="uk-text-center@s">008</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="009"><span class="uk-text-center@s">009</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="010"><span class="uk-text-center@s">010</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="011"><span class="uk-text-center@s">011</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="012"><span class="uk-text-center@s">012</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="013"><span class="uk-text-center@s">013</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="014"><span class="uk-text-center@s">014</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="015"><span class="uk-text-center@s">015</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="016"><span class="uk-text-center@s">016</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="017"><span class="uk-text-center@s">017</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="018"><span class="uk-text-center@s">018</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="019"><span class="uk-text-center@s">019</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="020"><span class="uk-text-center@s">020</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="021"><span class="uk-text-center@s">021</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="022"><span class="uk-text-center@s">022</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="023"><span class="uk-text-center@s">023</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="024"><span class="uk-text-center@s">024</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="025"><span class="uk-text-center@s">025</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="026"><span class="uk-text-center@s">026</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="027"><span class="uk-text-center@s">027</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="028"><span class="uk-text-center@s">028</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="029"><span class="uk-text-center@s">029</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="030"><span class="uk-text-center@s">030</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="031"><span class="uk-text-center@s">031</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="032"><span class="uk-text-center@s">032</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="033"><span class="uk-text-center@s">033</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="034"><span class="uk-text-center@s">034</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="035"><span class="uk-text-center@s">035</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="036"><span class="uk-text-center@s">036</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="037"><span class="uk-text-center@s">037</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="038"><span class="uk-text-center@s">038</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="039"><span class="uk-text-center@s">039</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="040"><span class="uk-text-center@s">040</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="041"><span class="uk-text-center@s">041</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="042"><span class="uk-text-center@s">042</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="043"><span class="uk-text-center@s">043</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="044"><span class="uk-text-center@s">044</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="045"><span class="uk-text-center@s">045</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="046"><span class="uk-text-center@s">046</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="047"><span class="uk-text-center@s">047</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="048"><span class="uk-text-center@s">048</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="049"><span class="uk-text-center@s">049</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="050"><span class="uk-text-center@s">050</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="051"><span class="uk-text-center@s">051</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="052"><span class="uk-text-center@s">052</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="053"><span class="uk-text-center@s">053</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="054"><span class="uk-text-center@s">054</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="055"><span class="uk-text-center@s">055</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="056"><span class="uk-text-center@s">056</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="057"><span class="uk-text-center@s">057</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="058"><span class="uk-text-center@s">058</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="059"><span class="uk-text-center@s">059</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="060"><span class="uk-text-center@s">060</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="061"><span class="uk-text-center@s">061</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="062"><span class="uk-text-center@s">062</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="063"><span class="uk-text-center@s">063</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="064"><span class="uk-text-center@s">064</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="065"><span class="uk-text-center@s">065</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="066"><span class="uk-text-center@s">066</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="067"><span class="uk-text-center@s">067</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="068"><span class="uk-text-center@s">068</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="069"><span class="uk-text-center@s">069</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="000"><span class="uk-text-center@s">000</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="001"><span class="uk-text-center@s">001</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="062"><span class="uk-text-center@s">062</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="063"><span class="uk-text-center@s">063</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="064"><span class="uk-text-center@s">064</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="065"><span class="uk-text-center@s">065</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="066"><span class="uk-text-center@s">066</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="067"><span class="uk-text-center@s">067</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="068"><span class="uk-text-center@s">068</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="069"><span class="uk-text-center@s">069</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="000"><span class="uk-text-center@s">000</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="071"><span class="uk-text-center@s">071</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="072"><span class="uk-text-center@s">072</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="073"><span class="uk-text-center@s">073</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="074"><span class="uk-text-center@s">074</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="075"><span class="uk-text-center@s">075</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="076"><span class="uk-text-center@s">076</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="077"><span class="uk-text-center@s">077</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="078"><span class="uk-text-center@s">078</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="079"><span class="uk-text-center@s">079</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="080"><span class="uk-text-center@s">080</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="081"><span class="uk-text-center@s">081</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="082"><span class="uk-text-center@s">082</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="083"><span class="uk-text-center@s">083</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="084"><span class="uk-text-center@s">084</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="085"><span class="uk-text-center@s">085</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="086"><span class="uk-text-center@s">086</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="087"><span class="uk-text-center@s">087</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="088"><span class="uk-text-center@s">088</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="089"><span class="uk-text-center@s">089</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="090"><span class="uk-text-center@s">090</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="091"><span class="uk-text-center@s">091</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="092"><span class="uk-text-center@s">092</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="093"><span class="uk-text-center@s">093</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="094"><span class="uk-text-center@s">094</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="095"><span class="uk-text-center@s">095</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="096"><span class="uk-text-center@s">096</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="099"><span class="uk-text-center@s">099</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="097"><span class="uk-text-center@s">097</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="098"><span class="uk-text-center@s">098</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-199" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>100 - 199</h3>
+                <ul class="seletores-199">
+                    <li><a href="#" class="dot-mini inativo" id="100"><span class="uk-text-center@s">100</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="101"><span class="uk-text-center@s">101</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="102"><span class="uk-text-center@s">102</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="103"><span class="uk-text-center@s">103</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="104"><span class="uk-text-center@s">104</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="105"><span class="uk-text-center@s">105</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="106"><span class="uk-text-center@s">106</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="107"><span class="uk-text-center@s">107</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="108"><span class="uk-text-center@s">108</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="109"><span class="uk-text-center@s">109</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="110"><span class="uk-text-center@s">110</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="111"><span class="uk-text-center@s">111</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="112"><span class="uk-text-center@s">112</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="113"><span class="uk-text-center@s">113</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="114"><span class="uk-text-center@s">114</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="115"><span class="uk-text-center@s">115</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="116"><span class="uk-text-center@s">116</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="117"><span class="uk-text-center@s">117</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="118"><span class="uk-text-center@s">118</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="119"><span class="uk-text-center@s">119</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="120"><span class="uk-text-center@s">120</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="121"><span class="uk-text-center@s">121</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="122"><span class="uk-text-center@s">122</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="123"><span class="uk-text-center@s">123</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="124"><span class="uk-text-center@s">124</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="125"><span class="uk-text-center@s">125</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="126"><span class="uk-text-center@s">126</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="127"><span class="uk-text-center@s">127</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="128"><span class="uk-text-center@s">128</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="129"><span class="uk-text-center@s">129</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="130"><span class="uk-text-center@s">130</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="131"><span class="uk-text-center@s">131</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="132"><span class="uk-text-center@s">132</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="133"><span class="uk-text-center@s">133</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="134"><span class="uk-text-center@s">134</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="135"><span class="uk-text-center@s">135</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="136"><span class="uk-text-center@s">136</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="137"><span class="uk-text-center@s">137</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="138"><span class="uk-text-center@s">138</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="139"><span class="uk-text-center@s">139</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="140"><span class="uk-text-center@s">140</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="141"><span class="uk-text-center@s">141</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="142"><span class="uk-text-center@s">142</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="143"><span class="uk-text-center@s">143</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="144"><span class="uk-text-center@s">144</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="145"><span class="uk-text-center@s">145</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="146"><span class="uk-text-center@s">146</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="147"><span class="uk-text-center@s">147</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="148"><span class="uk-text-center@s">148</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="149"><span class="uk-text-center@s">149</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="150"><span class="uk-text-center@s">150</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="151"><span class="uk-text-center@s">151</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="152"><span class="uk-text-center@s">152</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="153"><span class="uk-text-center@s">153</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="154"><span class="uk-text-center@s">154</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="155"><span class="uk-text-center@s">155</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="156"><span class="uk-text-center@s">156</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="157"><span class="uk-text-center@s">157</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="158"><span class="uk-text-center@s">158</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="159"><span class="uk-text-center@s">159</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="160"><span class="uk-text-center@s">160</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="161"><span class="uk-text-center@s">161</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="162"><span class="uk-text-center@s">162</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="163"><span class="uk-text-center@s">163</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="164"><span class="uk-text-center@s">164</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="165"><span class="uk-text-center@s">165</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="166"><span class="uk-text-center@s">166</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="167"><span class="uk-text-center@s">167</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="168"><span class="uk-text-center@s">168</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="169"><span class="uk-text-center@s">169</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="100"><span class="uk-text-center@s">100</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="101"><span class="uk-text-center@s">101</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="162"><span class="uk-text-center@s">162</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="163"><span class="uk-text-center@s">163</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="164"><span class="uk-text-center@s">164</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="165"><span class="uk-text-center@s">165</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="166"><span class="uk-text-center@s">166</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="167"><span class="uk-text-center@s">167</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="168"><span class="uk-text-center@s">168</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="169"><span class="uk-text-center@s">169</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="100"><span class="uk-text-center@s">100</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="171"><span class="uk-text-center@s">171</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="172"><span class="uk-text-center@s">172</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="173"><span class="uk-text-center@s">173</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="174"><span class="uk-text-center@s">174</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="175"><span class="uk-text-center@s">175</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="176"><span class="uk-text-center@s">176</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="177"><span class="uk-text-center@s">177</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="178"><span class="uk-text-center@s">178</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="179"><span class="uk-text-center@s">179</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="180"><span class="uk-text-center@s">180</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="181"><span class="uk-text-center@s">181</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="182"><span class="uk-text-center@s">182</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="183"><span class="uk-text-center@s">183</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="184"><span class="uk-text-center@s">184</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="185"><span class="uk-text-center@s">185</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="186"><span class="uk-text-center@s">186</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="187"><span class="uk-text-center@s">187</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="188"><span class="uk-text-center@s">188</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="189"><span class="uk-text-center@s">189</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="190"><span class="uk-text-center@s">190</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="191"><span class="uk-text-center@s">191</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="192"><span class="uk-text-center@s">192</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="193"><span class="uk-text-center@s">193</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="194"><span class="uk-text-center@s">194</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="195"><span class="uk-text-center@s">195</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="196"><span class="uk-text-center@s">196</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="197"><span class="uk-text-center@s">197</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="198"><span class="uk-text-center@s">198</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="199"><span class="uk-text-center@s">199</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-299" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>200 - 299</h3>
+                <ul class="seletores-299">
+                    <li><a href="#" class="dot-mini inativo" id="200"><span class="uk-text-center@s">200</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="201"><span class="uk-text-center@s">201</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="202"><span class="uk-text-center@s">202</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="203"><span class="uk-text-center@s">203</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="204"><span class="uk-text-center@s">204</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="205"><span class="uk-text-center@s">205</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="206"><span class="uk-text-center@s">206</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="207"><span class="uk-text-center@s">207</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="208"><span class="uk-text-center@s">208</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="209"><span class="uk-text-center@s">209</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="210"><span class="uk-text-center@s">210</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="211"><span class="uk-text-center@s">211</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="212"><span class="uk-text-center@s">212</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="213"><span class="uk-text-center@s">213</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="214"><span class="uk-text-center@s">214</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="215"><span class="uk-text-center@s">215</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="216"><span class="uk-text-center@s">216</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="217"><span class="uk-text-center@s">217</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="218"><span class="uk-text-center@s">218</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="219"><span class="uk-text-center@s">219</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="220"><span class="uk-text-center@s">220</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="221"><span class="uk-text-center@s">221</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="222"><span class="uk-text-center@s">222</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="223"><span class="uk-text-center@s">223</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="224"><span class="uk-text-center@s">224</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="225"><span class="uk-text-center@s">225</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="226"><span class="uk-text-center@s">226</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="227"><span class="uk-text-center@s">227</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="228"><span class="uk-text-center@s">228</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="229"><span class="uk-text-center@s">229</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="230"><span class="uk-text-center@s">230</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="231"><span class="uk-text-center@s">231</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="232"><span class="uk-text-center@s">232</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="233"><span class="uk-text-center@s">233</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="234"><span class="uk-text-center@s">234</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="235"><span class="uk-text-center@s">235</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="236"><span class="uk-text-center@s">236</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="237"><span class="uk-text-center@s">237</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="238"><span class="uk-text-center@s">238</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="239"><span class="uk-text-center@s">239</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="240"><span class="uk-text-center@s">240</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="241"><span class="uk-text-center@s">241</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="242"><span class="uk-text-center@s">242</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="243"><span class="uk-text-center@s">243</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="244"><span class="uk-text-center@s">244</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="245"><span class="uk-text-center@s">245</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="246"><span class="uk-text-center@s">246</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="247"><span class="uk-text-center@s">247</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="248"><span class="uk-text-center@s">248</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="249"><span class="uk-text-center@s">249</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="250"><span class="uk-text-center@s">250</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="251"><span class="uk-text-center@s">251</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="252"><span class="uk-text-center@s">252</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="253"><span class="uk-text-center@s">253</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="254"><span class="uk-text-center@s">254</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="255"><span class="uk-text-center@s">255</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="256"><span class="uk-text-center@s">256</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="257"><span class="uk-text-center@s">257</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="258"><span class="uk-text-center@s">258</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="259"><span class="uk-text-center@s">259</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="260"><span class="uk-text-center@s">260</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="261"><span class="uk-text-center@s">261</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="262"><span class="uk-text-center@s">262</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="263"><span class="uk-text-center@s">263</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="264"><span class="uk-text-center@s">264</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="265"><span class="uk-text-center@s">265</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="266"><span class="uk-text-center@s">266</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="267"><span class="uk-text-center@s">267</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="268"><span class="uk-text-center@s">268</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="269"><span class="uk-text-center@s">269</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="200"><span class="uk-text-center@s">200</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="201"><span class="uk-text-center@s">201</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="262"><span class="uk-text-center@s">262</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="263"><span class="uk-text-center@s">263</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="264"><span class="uk-text-center@s">264</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="265"><span class="uk-text-center@s">265</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="266"><span class="uk-text-center@s">266</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="267"><span class="uk-text-center@s">267</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="268"><span class="uk-text-center@s">268</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="269"><span class="uk-text-center@s">269</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="200"><span class="uk-text-center@s">200</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="271"><span class="uk-text-center@s">271</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="272"><span class="uk-text-center@s">272</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="273"><span class="uk-text-center@s">273</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="274"><span class="uk-text-center@s">274</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="275"><span class="uk-text-center@s">275</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="276"><span class="uk-text-center@s">276</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="277"><span class="uk-text-center@s">277</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="278"><span class="uk-text-center@s">278</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="279"><span class="uk-text-center@s">279</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="280"><span class="uk-text-center@s">280</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="281"><span class="uk-text-center@s">281</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="282"><span class="uk-text-center@s">282</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="283"><span class="uk-text-center@s">283</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="284"><span class="uk-text-center@s">284</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="285"><span class="uk-text-center@s">285</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="286"><span class="uk-text-center@s">286</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="287"><span class="uk-text-center@s">287</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="288"><span class="uk-text-center@s">288</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="289"><span class="uk-text-center@s">289</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="290"><span class="uk-text-center@s">290</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="291"><span class="uk-text-center@s">291</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="292"><span class="uk-text-center@s">292</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="293"><span class="uk-text-center@s">293</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="294"><span class="uk-text-center@s">294</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="295"><span class="uk-text-center@s">295</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="296"><span class="uk-text-center@s">296</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="297"><span class="uk-text-center@s">297</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="298"><span class="uk-text-center@s">298</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="299"><span class="uk-text-center@s">299</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-399" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>300 - 399</h3>
+                <ul class="seletores-399">
+                    <li><a href="#" class="dot-mini inativo" id="300"><span class="uk-text-center@s">300</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="301"><span class="uk-text-center@s">301</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="302"><span class="uk-text-center@s">302</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="303"><span class="uk-text-center@s">303</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="304"><span class="uk-text-center@s">304</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="305"><span class="uk-text-center@s">305</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="306"><span class="uk-text-center@s">306</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="307"><span class="uk-text-center@s">307</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="308"><span class="uk-text-center@s">308</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="309"><span class="uk-text-center@s">309</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="310"><span class="uk-text-center@s">310</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="311"><span class="uk-text-center@s">311</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="312"><span class="uk-text-center@s">312</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="313"><span class="uk-text-center@s">313</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="314"><span class="uk-text-center@s">314</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="315"><span class="uk-text-center@s">315</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="316"><span class="uk-text-center@s">316</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="317"><span class="uk-text-center@s">317</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="318"><span class="uk-text-center@s">318</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="319"><span class="uk-text-center@s">319</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="320"><span class="uk-text-center@s">320</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="321"><span class="uk-text-center@s">321</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="322"><span class="uk-text-center@s">322</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="323"><span class="uk-text-center@s">323</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="324"><span class="uk-text-center@s">324</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="325"><span class="uk-text-center@s">325</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="326"><span class="uk-text-center@s">326</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="327"><span class="uk-text-center@s">327</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="328"><span class="uk-text-center@s">328</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="329"><span class="uk-text-center@s">329</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="330"><span class="uk-text-center@s">330</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="331"><span class="uk-text-center@s">331</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="332"><span class="uk-text-center@s">332</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="333"><span class="uk-text-center@s">333</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="334"><span class="uk-text-center@s">334</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="335"><span class="uk-text-center@s">335</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="336"><span class="uk-text-center@s">336</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="337"><span class="uk-text-center@s">337</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="338"><span class="uk-text-center@s">338</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="339"><span class="uk-text-center@s">339</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="340"><span class="uk-text-center@s">340</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="341"><span class="uk-text-center@s">341</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="342"><span class="uk-text-center@s">342</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="343"><span class="uk-text-center@s">343</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="344"><span class="uk-text-center@s">344</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="345"><span class="uk-text-center@s">345</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="346"><span class="uk-text-center@s">346</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="347"><span class="uk-text-center@s">347</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="348"><span class="uk-text-center@s">348</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="349"><span class="uk-text-center@s">349</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="350"><span class="uk-text-center@s">350</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="351"><span class="uk-text-center@s">351</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="352"><span class="uk-text-center@s">352</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="353"><span class="uk-text-center@s">353</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="354"><span class="uk-text-center@s">354</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="355"><span class="uk-text-center@s">355</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="356"><span class="uk-text-center@s">356</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="357"><span class="uk-text-center@s">357</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="358"><span class="uk-text-center@s">358</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="359"><span class="uk-text-center@s">359</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="360"><span class="uk-text-center@s">360</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="361"><span class="uk-text-center@s">361</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="362"><span class="uk-text-center@s">362</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="363"><span class="uk-text-center@s">363</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="364"><span class="uk-text-center@s">364</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="365"><span class="uk-text-center@s">365</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="366"><span class="uk-text-center@s">366</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="367"><span class="uk-text-center@s">367</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="368"><span class="uk-text-center@s">368</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="369"><span class="uk-text-center@s">369</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="300"><span class="uk-text-center@s">300</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="301"><span class="uk-text-center@s">301</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="362"><span class="uk-text-center@s">362</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="363"><span class="uk-text-center@s">363</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="364"><span class="uk-text-center@s">364</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="365"><span class="uk-text-center@s">365</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="366"><span class="uk-text-center@s">366</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="367"><span class="uk-text-center@s">367</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="368"><span class="uk-text-center@s">368</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="369"><span class="uk-text-center@s">369</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="300"><span class="uk-text-center@s">300</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="371"><span class="uk-text-center@s">371</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="372"><span class="uk-text-center@s">372</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="373"><span class="uk-text-center@s">373</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="374"><span class="uk-text-center@s">374</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="375"><span class="uk-text-center@s">375</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="376"><span class="uk-text-center@s">376</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="377"><span class="uk-text-center@s">377</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="378"><span class="uk-text-center@s">378</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="379"><span class="uk-text-center@s">379</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="380"><span class="uk-text-center@s">380</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="381"><span class="uk-text-center@s">381</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="382"><span class="uk-text-center@s">382</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="383"><span class="uk-text-center@s">383</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="384"><span class="uk-text-center@s">384</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="385"><span class="uk-text-center@s">385</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="386"><span class="uk-text-center@s">386</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="387"><span class="uk-text-center@s">387</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="388"><span class="uk-text-center@s">388</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="389"><span class="uk-text-center@s">389</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="390"><span class="uk-text-center@s">390</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="391"><span class="uk-text-center@s">391</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="392"><span class="uk-text-center@s">392</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="393"><span class="uk-text-center@s">393</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="394"><span class="uk-text-center@s">394</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="395"><span class="uk-text-center@s">395</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="396"><span class="uk-text-center@s">396</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="397"><span class="uk-text-center@s">397</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="398"><span class="uk-text-center@s">398</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="399"><span class="uk-text-center@s">399</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-499" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>400 - 499</h3>
+                <ul class="seletores-499">
+                    <li><a href="#" class="dot-mini inativo" id="400"><span class="uk-text-center@s">400</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="401"><span class="uk-text-center@s">401</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="402"><span class="uk-text-center@s">402</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="403"><span class="uk-text-center@s">403</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="404"><span class="uk-text-center@s">404</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="405"><span class="uk-text-center@s">405</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="406"><span class="uk-text-center@s">406</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="407"><span class="uk-text-center@s">407</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="408"><span class="uk-text-center@s">408</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="409"><span class="uk-text-center@s">409</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="410"><span class="uk-text-center@s">410</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="411"><span class="uk-text-center@s">411</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="412"><span class="uk-text-center@s">412</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="413"><span class="uk-text-center@s">413</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="414"><span class="uk-text-center@s">414</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="415"><span class="uk-text-center@s">415</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="416"><span class="uk-text-center@s">416</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="417"><span class="uk-text-center@s">417</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="418"><span class="uk-text-center@s">418</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="419"><span class="uk-text-center@s">419</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="420"><span class="uk-text-center@s">420</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="421"><span class="uk-text-center@s">421</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="422"><span class="uk-text-center@s">422</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="423"><span class="uk-text-center@s">423</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="424"><span class="uk-text-center@s">424</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="425"><span class="uk-text-center@s">425</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="426"><span class="uk-text-center@s">426</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="427"><span class="uk-text-center@s">427</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="428"><span class="uk-text-center@s">428</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="429"><span class="uk-text-center@s">429</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="430"><span class="uk-text-center@s">430</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="431"><span class="uk-text-center@s">431</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="432"><span class="uk-text-center@s">432</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="433"><span class="uk-text-center@s">433</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="434"><span class="uk-text-center@s">434</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="435"><span class="uk-text-center@s">435</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="436"><span class="uk-text-center@s">436</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="437"><span class="uk-text-center@s">437</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="438"><span class="uk-text-center@s">438</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="439"><span class="uk-text-center@s">439</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="440"><span class="uk-text-center@s">440</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="441"><span class="uk-text-center@s">441</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="442"><span class="uk-text-center@s">442</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="443"><span class="uk-text-center@s">443</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="444"><span class="uk-text-center@s">444</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="445"><span class="uk-text-center@s">445</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="446"><span class="uk-text-center@s">446</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="447"><span class="uk-text-center@s">447</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="448"><span class="uk-text-center@s">448</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="449"><span class="uk-text-center@s">449</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="450"><span class="uk-text-center@s">450</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="451"><span class="uk-text-center@s">451</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="452"><span class="uk-text-center@s">452</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="453"><span class="uk-text-center@s">453</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="454"><span class="uk-text-center@s">454</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="455"><span class="uk-text-center@s">455</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="456"><span class="uk-text-center@s">456</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="457"><span class="uk-text-center@s">457</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="458"><span class="uk-text-center@s">458</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="459"><span class="uk-text-center@s">459</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="460"><span class="uk-text-center@s">460</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="461"><span class="uk-text-center@s">461</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="462"><span class="uk-text-center@s">462</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="463"><span class="uk-text-center@s">463</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="464"><span class="uk-text-center@s">464</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="465"><span class="uk-text-center@s">465</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="466"><span class="uk-text-center@s">466</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="467"><span class="uk-text-center@s">467</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="468"><span class="uk-text-center@s">468</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="469"><span class="uk-text-center@s">469</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="400"><span class="uk-text-center@s">400</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="401"><span class="uk-text-center@s">401</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="462"><span class="uk-text-center@s">462</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="463"><span class="uk-text-center@s">463</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="464"><span class="uk-text-center@s">464</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="465"><span class="uk-text-center@s">465</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="466"><span class="uk-text-center@s">466</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="467"><span class="uk-text-center@s">467</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="468"><span class="uk-text-center@s">468</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="469"><span class="uk-text-center@s">469</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="400"><span class="uk-text-center@s">400</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="471"><span class="uk-text-center@s">471</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="472"><span class="uk-text-center@s">472</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="473"><span class="uk-text-center@s">473</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="474"><span class="uk-text-center@s">474</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="475"><span class="uk-text-center@s">475</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="476"><span class="uk-text-center@s">476</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="477"><span class="uk-text-center@s">477</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="478"><span class="uk-text-center@s">478</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="479"><span class="uk-text-center@s">479</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="480"><span class="uk-text-center@s">480</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="481"><span class="uk-text-center@s">481</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="482"><span class="uk-text-center@s">482</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="483"><span class="uk-text-center@s">483</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="484"><span class="uk-text-center@s">484</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="485"><span class="uk-text-center@s">485</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="486"><span class="uk-text-center@s">486</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="487"><span class="uk-text-center@s">487</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="488"><span class="uk-text-center@s">488</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="489"><span class="uk-text-center@s">489</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="490"><span class="uk-text-center@s">490</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="491"><span class="uk-text-center@s">491</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="492"><span class="uk-text-center@s">492</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="493"><span class="uk-text-center@s">493</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="494"><span class="uk-text-center@s">494</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="495"><span class="uk-text-center@s">495</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="496"><span class="uk-text-center@s">496</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="497"><span class="uk-text-center@s">497</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="498"><span class="uk-text-center@s">498</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="499"><span class="uk-text-center@s">499</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-599" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>500 - 599</h3>
+                <ul class="seletores-599">
+                    <li><a href="#" class="dot-mini inativo" id="500"><span class="uk-text-center@s">500</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="501"><span class="uk-text-center@s">501</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="502"><span class="uk-text-center@s">502</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="503"><span class="uk-text-center@s">503</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="504"><span class="uk-text-center@s">504</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="505"><span class="uk-text-center@s">505</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="506"><span class="uk-text-center@s">506</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="507"><span class="uk-text-center@s">507</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="508"><span class="uk-text-center@s">508</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="509"><span class="uk-text-center@s">509</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="510"><span class="uk-text-center@s">510</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="511"><span class="uk-text-center@s">511</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="512"><span class="uk-text-center@s">512</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="513"><span class="uk-text-center@s">513</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="514"><span class="uk-text-center@s">514</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="515"><span class="uk-text-center@s">515</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="516"><span class="uk-text-center@s">516</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="517"><span class="uk-text-center@s">517</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="518"><span class="uk-text-center@s">518</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="519"><span class="uk-text-center@s">519</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="520"><span class="uk-text-center@s">520</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="521"><span class="uk-text-center@s">521</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="522"><span class="uk-text-center@s">522</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="523"><span class="uk-text-center@s">523</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="524"><span class="uk-text-center@s">524</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="525"><span class="uk-text-center@s">525</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="526"><span class="uk-text-center@s">526</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="527"><span class="uk-text-center@s">527</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="528"><span class="uk-text-center@s">528</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="529"><span class="uk-text-center@s">529</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="530"><span class="uk-text-center@s">530</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="531"><span class="uk-text-center@s">531</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="532"><span class="uk-text-center@s">532</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="533"><span class="uk-text-center@s">533</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="534"><span class="uk-text-center@s">534</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="535"><span class="uk-text-center@s">535</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="536"><span class="uk-text-center@s">536</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="537"><span class="uk-text-center@s">537</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="538"><span class="uk-text-center@s">538</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="539"><span class="uk-text-center@s">539</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="540"><span class="uk-text-center@s">540</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="541"><span class="uk-text-center@s">541</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="542"><span class="uk-text-center@s">542</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="543"><span class="uk-text-center@s">543</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="544"><span class="uk-text-center@s">544</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="545"><span class="uk-text-center@s">545</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="546"><span class="uk-text-center@s">546</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="547"><span class="uk-text-center@s">547</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="548"><span class="uk-text-center@s">548</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="549"><span class="uk-text-center@s">549</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="550"><span class="uk-text-center@s">550</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="551"><span class="uk-text-center@s">551</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="552"><span class="uk-text-center@s">552</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="553"><span class="uk-text-center@s">553</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="554"><span class="uk-text-center@s">554</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="555"><span class="uk-text-center@s">555</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="556"><span class="uk-text-center@s">556</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="557"><span class="uk-text-center@s">557</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="558"><span class="uk-text-center@s">558</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="559"><span class="uk-text-center@s">559</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="560"><span class="uk-text-center@s">560</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="561"><span class="uk-text-center@s">561</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="562"><span class="uk-text-center@s">562</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="563"><span class="uk-text-center@s">563</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="564"><span class="uk-text-center@s">564</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="565"><span class="uk-text-center@s">565</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="566"><span class="uk-text-center@s">566</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="567"><span class="uk-text-center@s">567</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="568"><span class="uk-text-center@s">568</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="569"><span class="uk-text-center@s">569</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="500"><span class="uk-text-center@s">500</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="501"><span class="uk-text-center@s">501</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="562"><span class="uk-text-center@s">562</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="563"><span class="uk-text-center@s">563</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="564"><span class="uk-text-center@s">564</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="565"><span class="uk-text-center@s">565</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="566"><span class="uk-text-center@s">566</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="567"><span class="uk-text-center@s">567</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="568"><span class="uk-text-center@s">568</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="569"><span class="uk-text-center@s">569</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="500"><span class="uk-text-center@s">500</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="571"><span class="uk-text-center@s">571</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="572"><span class="uk-text-center@s">572</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="573"><span class="uk-text-center@s">573</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="574"><span class="uk-text-center@s">574</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="575"><span class="uk-text-center@s">575</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="576"><span class="uk-text-center@s">576</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="577"><span class="uk-text-center@s">577</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="578"><span class="uk-text-center@s">578</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="579"><span class="uk-text-center@s">579</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="580"><span class="uk-text-center@s">580</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="581"><span class="uk-text-center@s">581</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="582"><span class="uk-text-center@s">582</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="583"><span class="uk-text-center@s">583</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="584"><span class="uk-text-center@s">584</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="585"><span class="uk-text-center@s">585</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="586"><span class="uk-text-center@s">586</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="587"><span class="uk-text-center@s">587</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="588"><span class="uk-text-center@s">588</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="589"><span class="uk-text-center@s">589</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="590"><span class="uk-text-center@s">590</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="591"><span class="uk-text-center@s">591</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="592"><span class="uk-text-center@s">592</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="593"><span class="uk-text-center@s">593</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="594"><span class="uk-text-center@s">594</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="595"><span class="uk-text-center@s">595</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="596"><span class="uk-text-center@s">596</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="597"><span class="uk-text-center@s">597</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="598"><span class="uk-text-center@s">598</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="599"><span class="uk-text-center@s">599</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-699" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>600 - 699</h3>
+                <ul class="seletores-699">
+                    <li><a href="#" class="dot-mini inativo" id="600"><span class="uk-text-center@s">600</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="601"><span class="uk-text-center@s">601</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="602"><span class="uk-text-center@s">602</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="603"><span class="uk-text-center@s">603</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="604"><span class="uk-text-center@s">604</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="605"><span class="uk-text-center@s">605</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="606"><span class="uk-text-center@s">606</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="607"><span class="uk-text-center@s">607</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="608"><span class="uk-text-center@s">608</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="609"><span class="uk-text-center@s">609</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="610"><span class="uk-text-center@s">610</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="611"><span class="uk-text-center@s">611</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="612"><span class="uk-text-center@s">612</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="613"><span class="uk-text-center@s">613</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="614"><span class="uk-text-center@s">614</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="615"><span class="uk-text-center@s">615</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="616"><span class="uk-text-center@s">616</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="617"><span class="uk-text-center@s">617</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="618"><span class="uk-text-center@s">618</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="619"><span class="uk-text-center@s">619</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="620"><span class="uk-text-center@s">620</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="621"><span class="uk-text-center@s">621</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="622"><span class="uk-text-center@s">622</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="623"><span class="uk-text-center@s">623</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="624"><span class="uk-text-center@s">624</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="625"><span class="uk-text-center@s">625</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="626"><span class="uk-text-center@s">626</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="627"><span class="uk-text-center@s">627</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="628"><span class="uk-text-center@s">628</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="629"><span class="uk-text-center@s">629</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="630"><span class="uk-text-center@s">630</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="631"><span class="uk-text-center@s">631</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="632"><span class="uk-text-center@s">632</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="633"><span class="uk-text-center@s">633</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="634"><span class="uk-text-center@s">634</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="635"><span class="uk-text-center@s">635</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="636"><span class="uk-text-center@s">636</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="637"><span class="uk-text-center@s">637</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="638"><span class="uk-text-center@s">638</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="639"><span class="uk-text-center@s">639</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="640"><span class="uk-text-center@s">640</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="641"><span class="uk-text-center@s">641</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="642"><span class="uk-text-center@s">642</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="643"><span class="uk-text-center@s">643</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="644"><span class="uk-text-center@s">644</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="645"><span class="uk-text-center@s">645</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="646"><span class="uk-text-center@s">646</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="647"><span class="uk-text-center@s">647</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="648"><span class="uk-text-center@s">648</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="649"><span class="uk-text-center@s">649</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="650"><span class="uk-text-center@s">650</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="651"><span class="uk-text-center@s">651</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="652"><span class="uk-text-center@s">652</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="653"><span class="uk-text-center@s">653</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="654"><span class="uk-text-center@s">654</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="655"><span class="uk-text-center@s">655</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="656"><span class="uk-text-center@s">656</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="657"><span class="uk-text-center@s">657</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="658"><span class="uk-text-center@s">658</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="659"><span class="uk-text-center@s">659</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="660"><span class="uk-text-center@s">660</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="661"><span class="uk-text-center@s">661</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="662"><span class="uk-text-center@s">662</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="663"><span class="uk-text-center@s">663</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="664"><span class="uk-text-center@s">664</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="665"><span class="uk-text-center@s">665</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="666"><span class="uk-text-center@s">666</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="667"><span class="uk-text-center@s">667</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="668"><span class="uk-text-center@s">668</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="669"><span class="uk-text-center@s">669</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="600"><span class="uk-text-center@s">600</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="601"><span class="uk-text-center@s">601</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="662"><span class="uk-text-center@s">662</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="663"><span class="uk-text-center@s">663</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="664"><span class="uk-text-center@s">664</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="665"><span class="uk-text-center@s">665</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="666"><span class="uk-text-center@s">666</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="667"><span class="uk-text-center@s">667</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="668"><span class="uk-text-center@s">668</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="669"><span class="uk-text-center@s">669</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="600"><span class="uk-text-center@s">600</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="671"><span class="uk-text-center@s">671</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="672"><span class="uk-text-center@s">672</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="673"><span class="uk-text-center@s">673</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="674"><span class="uk-text-center@s">674</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="675"><span class="uk-text-center@s">675</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="676"><span class="uk-text-center@s">676</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="677"><span class="uk-text-center@s">677</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="678"><span class="uk-text-center@s">678</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="679"><span class="uk-text-center@s">679</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="680"><span class="uk-text-center@s">680</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="681"><span class="uk-text-center@s">681</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="682"><span class="uk-text-center@s">682</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="683"><span class="uk-text-center@s">683</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="684"><span class="uk-text-center@s">684</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="685"><span class="uk-text-center@s">685</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="686"><span class="uk-text-center@s">686</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="687"><span class="uk-text-center@s">687</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="688"><span class="uk-text-center@s">688</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="689"><span class="uk-text-center@s">689</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="690"><span class="uk-text-center@s">690</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="691"><span class="uk-text-center@s">691</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="692"><span class="uk-text-center@s">692</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="693"><span class="uk-text-center@s">693</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="694"><span class="uk-text-center@s">694</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="695"><span class="uk-text-center@s">695</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="696"><span class="uk-text-center@s">696</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="697"><span class="uk-text-center@s">697</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="698"><span class="uk-text-center@s">698</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="699"><span class="uk-text-center@s">699</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-799" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>700 - 799</h3>
+                <ul class="seletores-799">
+                    <li><a href="#" class="dot-mini inativo" id="700"><span class="uk-text-center@s">700</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="701"><span class="uk-text-center@s">701</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="702"><span class="uk-text-center@s">702</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="703"><span class="uk-text-center@s">703</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="704"><span class="uk-text-center@s">704</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="705"><span class="uk-text-center@s">705</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="706"><span class="uk-text-center@s">706</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="707"><span class="uk-text-center@s">707</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="708"><span class="uk-text-center@s">708</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="709"><span class="uk-text-center@s">709</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="710"><span class="uk-text-center@s">710</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="711"><span class="uk-text-center@s">711</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="712"><span class="uk-text-center@s">712</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="713"><span class="uk-text-center@s">713</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="714"><span class="uk-text-center@s">714</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="715"><span class="uk-text-center@s">715</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="716"><span class="uk-text-center@s">716</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="717"><span class="uk-text-center@s">717</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="718"><span class="uk-text-center@s">718</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="719"><span class="uk-text-center@s">719</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="720"><span class="uk-text-center@s">720</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="721"><span class="uk-text-center@s">721</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="722"><span class="uk-text-center@s">722</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="723"><span class="uk-text-center@s">723</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="724"><span class="uk-text-center@s">724</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="725"><span class="uk-text-center@s">725</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="726"><span class="uk-text-center@s">726</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="727"><span class="uk-text-center@s">727</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="728"><span class="uk-text-center@s">728</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="729"><span class="uk-text-center@s">729</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="730"><span class="uk-text-center@s">730</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="731"><span class="uk-text-center@s">731</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="732"><span class="uk-text-center@s">732</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="733"><span class="uk-text-center@s">733</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="734"><span class="uk-text-center@s">734</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="735"><span class="uk-text-center@s">735</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="736"><span class="uk-text-center@s">736</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="737"><span class="uk-text-center@s">737</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="738"><span class="uk-text-center@s">738</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="739"><span class="uk-text-center@s">739</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="740"><span class="uk-text-center@s">740</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="741"><span class="uk-text-center@s">741</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="742"><span class="uk-text-center@s">742</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="743"><span class="uk-text-center@s">743</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="744"><span class="uk-text-center@s">744</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="745"><span class="uk-text-center@s">745</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="746"><span class="uk-text-center@s">746</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="747"><span class="uk-text-center@s">747</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="748"><span class="uk-text-center@s">748</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="749"><span class="uk-text-center@s">749</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="750"><span class="uk-text-center@s">750</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="751"><span class="uk-text-center@s">751</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="752"><span class="uk-text-center@s">752</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="753"><span class="uk-text-center@s">753</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="754"><span class="uk-text-center@s">754</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="755"><span class="uk-text-center@s">755</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="756"><span class="uk-text-center@s">756</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="757"><span class="uk-text-center@s">757</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="758"><span class="uk-text-center@s">758</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="759"><span class="uk-text-center@s">759</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="760"><span class="uk-text-center@s">760</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="761"><span class="uk-text-center@s">761</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="762"><span class="uk-text-center@s">762</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="763"><span class="uk-text-center@s">763</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="764"><span class="uk-text-center@s">764</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="765"><span class="uk-text-center@s">765</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="766"><span class="uk-text-center@s">766</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="767"><span class="uk-text-center@s">767</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="768"><span class="uk-text-center@s">768</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="769"><span class="uk-text-center@s">769</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="700"><span class="uk-text-center@s">700</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="701"><span class="uk-text-center@s">701</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="762"><span class="uk-text-center@s">762</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="763"><span class="uk-text-center@s">763</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="764"><span class="uk-text-center@s">764</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="765"><span class="uk-text-center@s">765</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="766"><span class="uk-text-center@s">766</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="767"><span class="uk-text-center@s">767</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="768"><span class="uk-text-center@s">768</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="769"><span class="uk-text-center@s">769</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="700"><span class="uk-text-center@s">700</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="771"><span class="uk-text-center@s">771</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="772"><span class="uk-text-center@s">772</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="773"><span class="uk-text-center@s">773</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="774"><span class="uk-text-center@s">774</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="775"><span class="uk-text-center@s">775</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="776"><span class="uk-text-center@s">776</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="777"><span class="uk-text-center@s">777</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="778"><span class="uk-text-center@s">778</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="779"><span class="uk-text-center@s">779</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="780"><span class="uk-text-center@s">780</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="781"><span class="uk-text-center@s">781</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="782"><span class="uk-text-center@s">782</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="783"><span class="uk-text-center@s">783</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="784"><span class="uk-text-center@s">784</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="785"><span class="uk-text-center@s">785</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="786"><span class="uk-text-center@s">786</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="787"><span class="uk-text-center@s">787</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="788"><span class="uk-text-center@s">788</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="789"><span class="uk-text-center@s">789</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="790"><span class="uk-text-center@s">790</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="791"><span class="uk-text-center@s">791</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="792"><span class="uk-text-center@s">792</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="793"><span class="uk-text-center@s">793</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="794"><span class="uk-text-center@s">794</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="795"><span class="uk-text-center@s">795</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="796"><span class="uk-text-center@s">796</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="797"><span class="uk-text-center@s">797</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="798"><span class="uk-text-center@s">798</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="799"><span class="uk-text-center@s">799</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-899" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>800 - 899</h3>
+                <ul class="seletores-899">
+                    <li><a href="#" class="dot-mini inativo" id="800"><span class="uk-text-center@s">800</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="801"><span class="uk-text-center@s">801</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="802"><span class="uk-text-center@s">802</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="803"><span class="uk-text-center@s">803</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="804"><span class="uk-text-center@s">804</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="805"><span class="uk-text-center@s">805</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="806"><span class="uk-text-center@s">806</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="807"><span class="uk-text-center@s">807</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="808"><span class="uk-text-center@s">808</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="809"><span class="uk-text-center@s">809</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="810"><span class="uk-text-center@s">810</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="811"><span class="uk-text-center@s">811</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="812"><span class="uk-text-center@s">812</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="813"><span class="uk-text-center@s">813</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="814"><span class="uk-text-center@s">814</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="815"><span class="uk-text-center@s">815</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="816"><span class="uk-text-center@s">816</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="817"><span class="uk-text-center@s">817</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="818"><span class="uk-text-center@s">818</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="819"><span class="uk-text-center@s">819</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="820"><span class="uk-text-center@s">820</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="821"><span class="uk-text-center@s">821</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="822"><span class="uk-text-center@s">822</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="823"><span class="uk-text-center@s">823</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="824"><span class="uk-text-center@s">824</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="825"><span class="uk-text-center@s">825</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="826"><span class="uk-text-center@s">826</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="827"><span class="uk-text-center@s">827</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="828"><span class="uk-text-center@s">828</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="829"><span class="uk-text-center@s">829</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="830"><span class="uk-text-center@s">830</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="831"><span class="uk-text-center@s">831</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="832"><span class="uk-text-center@s">832</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="833"><span class="uk-text-center@s">833</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="834"><span class="uk-text-center@s">834</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="835"><span class="uk-text-center@s">835</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="836"><span class="uk-text-center@s">836</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="837"><span class="uk-text-center@s">837</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="838"><span class="uk-text-center@s">838</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="839"><span class="uk-text-center@s">839</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="840"><span class="uk-text-center@s">840</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="841"><span class="uk-text-center@s">841</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="842"><span class="uk-text-center@s">842</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="843"><span class="uk-text-center@s">843</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="844"><span class="uk-text-center@s">844</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="845"><span class="uk-text-center@s">845</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="846"><span class="uk-text-center@s">846</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="847"><span class="uk-text-center@s">847</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="848"><span class="uk-text-center@s">848</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="849"><span class="uk-text-center@s">849</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="850"><span class="uk-text-center@s">850</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="851"><span class="uk-text-center@s">851</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="852"><span class="uk-text-center@s">852</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="853"><span class="uk-text-center@s">853</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="854"><span class="uk-text-center@s">854</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="855"><span class="uk-text-center@s">855</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="856"><span class="uk-text-center@s">856</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="857"><span class="uk-text-center@s">857</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="858"><span class="uk-text-center@s">858</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="859"><span class="uk-text-center@s">859</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="860"><span class="uk-text-center@s">860</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="861"><span class="uk-text-center@s">861</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="862"><span class="uk-text-center@s">862</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="863"><span class="uk-text-center@s">863</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="864"><span class="uk-text-center@s">864</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="865"><span class="uk-text-center@s">865</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="866"><span class="uk-text-center@s">866</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="867"><span class="uk-text-center@s">867</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="868"><span class="uk-text-center@s">868</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="869"><span class="uk-text-center@s">869</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="800"><span class="uk-text-center@s">800</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="801"><span class="uk-text-center@s">801</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="862"><span class="uk-text-center@s">862</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="863"><span class="uk-text-center@s">863</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="864"><span class="uk-text-center@s">864</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="865"><span class="uk-text-center@s">865</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="866"><span class="uk-text-center@s">866</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="867"><span class="uk-text-center@s">867</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="868"><span class="uk-text-center@s">868</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="869"><span class="uk-text-center@s">869</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="800"><span class="uk-text-center@s">800</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="871"><span class="uk-text-center@s">871</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="872"><span class="uk-text-center@s">872</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="873"><span class="uk-text-center@s">873</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="874"><span class="uk-text-center@s">874</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="875"><span class="uk-text-center@s">875</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="876"><span class="uk-text-center@s">876</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="877"><span class="uk-text-center@s">877</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="878"><span class="uk-text-center@s">878</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="879"><span class="uk-text-center@s">879</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="880"><span class="uk-text-center@s">880</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="881"><span class="uk-text-center@s">881</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="882"><span class="uk-text-center@s">882</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="883"><span class="uk-text-center@s">883</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="884"><span class="uk-text-center@s">884</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="885"><span class="uk-text-center@s">885</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="886"><span class="uk-text-center@s">886</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="887"><span class="uk-text-center@s">887</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="888"><span class="uk-text-center@s">888</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="889"><span class="uk-text-center@s">889</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="890"><span class="uk-text-center@s">890</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="891"><span class="uk-text-center@s">891</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="892"><span class="uk-text-center@s">892</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="893"><span class="uk-text-center@s">893</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="894"><span class="uk-text-center@s">894</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="895"><span class="uk-text-center@s">895</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="896"><span class="uk-text-center@s">896</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="897"><span class="uk-text-center@s">897</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="898"><span class="uk-text-center@s">898</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="899"><span class="uk-text-center@s">899</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="offcanvas-999" uk-offcanvas="flip:true ; mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>900 - 999</h3>
+                <ul class="seletores-999">
+                    <li><a href="#" class="dot-mini inativo" id="900"><span class="uk-text-center@s">900</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="901"><span class="uk-text-center@s">901</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="902"><span class="uk-text-center@s">902</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="903"><span class="uk-text-center@s">903</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="904"><span class="uk-text-center@s">904</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="905"><span class="uk-text-center@s">905</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="906"><span class="uk-text-center@s">906</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="907"><span class="uk-text-center@s">907</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="908"><span class="uk-text-center@s">908</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="909"><span class="uk-text-center@s">909</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="910"><span class="uk-text-center@s">910</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="911"><span class="uk-text-center@s">911</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="912"><span class="uk-text-center@s">912</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="913"><span class="uk-text-center@s">913</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="914"><span class="uk-text-center@s">914</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="915"><span class="uk-text-center@s">915</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="916"><span class="uk-text-center@s">916</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="917"><span class="uk-text-center@s">917</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="918"><span class="uk-text-center@s">918</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="919"><span class="uk-text-center@s">919</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="920"><span class="uk-text-center@s">920</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="921"><span class="uk-text-center@s">921</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="922"><span class="uk-text-center@s">922</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="923"><span class="uk-text-center@s">923</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="924"><span class="uk-text-center@s">924</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="925"><span class="uk-text-center@s">925</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="926"><span class="uk-text-center@s">926</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="927"><span class="uk-text-center@s">927</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="928"><span class="uk-text-center@s">928</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="929"><span class="uk-text-center@s">929</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="930"><span class="uk-text-center@s">930</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="931"><span class="uk-text-center@s">931</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="932"><span class="uk-text-center@s">932</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="933"><span class="uk-text-center@s">933</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="934"><span class="uk-text-center@s">934</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="935"><span class="uk-text-center@s">935</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="936"><span class="uk-text-center@s">936</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="937"><span class="uk-text-center@s">937</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="938"><span class="uk-text-center@s">938</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="939"><span class="uk-text-center@s">939</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="940"><span class="uk-text-center@s">940</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="941"><span class="uk-text-center@s">941</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="942"><span class="uk-text-center@s">942</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="943"><span class="uk-text-center@s">943</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="944"><span class="uk-text-center@s">944</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="945"><span class="uk-text-center@s">945</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="946"><span class="uk-text-center@s">946</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="947"><span class="uk-text-center@s">947</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="948"><span class="uk-text-center@s">948</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="949"><span class="uk-text-center@s">949</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="950"><span class="uk-text-center@s">950</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="951"><span class="uk-text-center@s">951</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="952"><span class="uk-text-center@s">952</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="953"><span class="uk-text-center@s">953</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="954"><span class="uk-text-center@s">954</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="955"><span class="uk-text-center@s">955</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="956"><span class="uk-text-center@s">956</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="957"><span class="uk-text-center@s">957</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="958"><span class="uk-text-center@s">958</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="959"><span class="uk-text-center@s">959</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="960"><span class="uk-text-center@s">960</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="961"><span class="uk-text-center@s">961</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="962"><span class="uk-text-center@s">962</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="963"><span class="uk-text-center@s">963</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="964"><span class="uk-text-center@s">964</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="965"><span class="uk-text-center@s">965</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="966"><span class="uk-text-center@s">966</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="967"><span class="uk-text-center@s">967</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="968"><span class="uk-text-center@s">968</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="969"><span class="uk-text-center@s">969</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="900"><span class="uk-text-center@s">900</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="901"><span class="uk-text-center@s">901</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="962"><span class="uk-text-center@s">962</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="963"><span class="uk-text-center@s">963</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="964"><span class="uk-text-center@s">964</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="965"><span class="uk-text-center@s">965</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="966"><span class="uk-text-center@s">966</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="967"><span class="uk-text-center@s">967</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="968"><span class="uk-text-center@s">968</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="969"><span class="uk-text-center@s">969</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="900"><span class="uk-text-center@s">900</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="971"><span class="uk-text-center@s">971</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="972"><span class="uk-text-center@s">972</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="973"><span class="uk-text-center@s">973</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="974"><span class="uk-text-center@s">974</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="975"><span class="uk-text-center@s">975</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="976"><span class="uk-text-center@s">976</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="977"><span class="uk-text-center@s">977</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="978"><span class="uk-text-center@s">978</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="979"><span class="uk-text-center@s">979</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="980"><span class="uk-text-center@s">980</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="981"><span class="uk-text-center@s">981</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="982"><span class="uk-text-center@s">982</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="983"><span class="uk-text-center@s">983</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="984"><span class="uk-text-center@s">984</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="985"><span class="uk-text-center@s">985</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="986"><span class="uk-text-center@s">986</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="987"><span class="uk-text-center@s">987</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="988"><span class="uk-text-center@s">988</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="989"><span class="uk-text-center@s">989</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="990"><span class="uk-text-center@s">990</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="991"><span class="uk-text-center@s">991</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="992"><span class="uk-text-center@s">992</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="993"><span class="uk-text-center@s">993</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="994"><span class="uk-text-center@s">994</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="995"><span class="uk-text-center@s">995</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="996"><span class="uk-text-center@s">996</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="997"><span class="uk-text-center@s">997</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="998"><span class="uk-text-center@s">998</span></a></li>
+                    <li><a href="#" class="dot-mini inativo" id="999"><span class="uk-text-center@s">999</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock offcanvas %}
+
+{% block footer %}
+
+{% endblock footer %}
+
+{% block script %}
+    <script>
+        var numeros_selecionados = [];
+        var dot_mini = document.getElementsByClassName("dot-mini");
+        var label_num_selected = document.querySelector(".label-numeros-selecionados");
+
+
+        function removeFromArray(array,value){
+            var index = array.indexOf(value);
+            if(index >-1){
+                array.splice(index,1);
+            }
+        }
+
+        function clearHTML(element){
+            element.value = '';
+        }
+
+        function updateSelectedNumbers(array){
+            clearHTML(label_num_selected);
+            label_num_selected.value = array
+            //label_num_selected.appendChild(document.createTextNode(array));
+            console.log(label_num_selected.value);
+        }
+
+        // inicialização vazia:
+        updateSelectedNumbers(numeros_selecionados);
+
+        for (var i = 0; i < dot_mini.length; i++) {
+            dot_mini[i].addEventListener("click", function() {
+                console.log(this.className);
+                if((this.className).includes('active')){
+                    this.className = this.className.replace("active","inativo");
+                    removeFromArray(numeros_selecionados,this.id);
+                    console.log(this.id + "    ----------    " + numeros_selecionados);
+                    updateSelectedNumbers(numeros_selecionados);
+                } else {
+                    this.className = this.className.replace("inativo","active");
+                    numeros_selecionados.push(this.id);
+                    console.log(this.id + "    ----------    " + numeros_selecionados);
+                    updateSelectedNumbers(numeros_selecionados);
+                }
+            });
+        }
+    </script>
+{% endblock script %}
