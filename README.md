@@ -1,4 +1,4 @@
-# rifaki_site
+# Rifaki_site
 
 O rifaki era inicialmente um projeto que tinha por objetivo desenvolver uma plataforma web de venda de rifas de carros, com sistema integrado de gerenciamento de vendas, anúncios, cadastro de usúsario, sistema de pagamento, carrinho de compras e varios outros recursos.
 
